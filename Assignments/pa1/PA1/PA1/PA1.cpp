@@ -74,15 +74,92 @@ HuffmanTree<char>* PA1::huffmanTreeFromText(vector<string> data)
     return forest.top();
 }
 
-//PA #1 TODO: Generates a Huffman character tree from the supplied encoding map
-//NOTE: I used a recursive helper function to solve this!
+void huffmanTreeFromMapHelper(HuffmanTree<char> *tree, char ch, string binPathStr)
+{
+    //Base case.
+    if (binPathStr.size() < 1)
+    {
+        return;
+    }
+
+    if (tree == nullptr)
+    {
+        //If tree doesn't exist create it.
+        tree = new HuffmanTree<char>(new HuffmanInternalNode<char>(nullptr, nullptr));
+    }
+
+    //Pointers to keep track of where we are.
+    HuffmanNode<char> *previous = tree->getRoot();
+    HuffmanNode<char> *current = previous;
+
+    for (auto c : binPathStr)
+    {
+        if (c == '0')
+        {
+            current = current->getLeftChild();
+
+            if (current == nullptr && c == binPathStr[binPathStr.size() - 1])
+            {
+                //If we are at the end and the leaf doesn't exist, create it.
+                current = new HuffmanLeafNode<char>(ch, 0);
+                previous->setLeftChild(current);
+                return;
+            }
+            else if (current == nullptr)
+            {
+                //If we aren't at the end and the node doesn't exist, create it.
+                current = new HuffmanInternalNode<char>(nullptr, nullptr);
+                previous->setLeftChild(current);
+            }
+
+            previous = current;
+
+        }
+        else if (c == '1')
+        {
+            current = current->getRightChild();
+
+            if (current == nullptr && c == binPathStr[binPathStr.size() - 1])
+            {
+                //If we are at the end and the leaf doesn't exist, create it.
+                current = new HuffmanLeafNode<char>(ch, 0);
+                previous->setRightChild(current);
+                return;
+            }
+            else if (current == nullptr)
+            {
+                //If we aren't at the end and the node doesn't exist, create it.
+                current = new HuffmanInternalNode<char>(nullptr, nullptr);
+                previous->setRightChild(current);
+            }
+
+            previous = current;
+        }
+    }
+}
+
 HuffmanTree<char>* PA1::huffmanTreeFromMap(unordered_map<char, string> huffmanMap)
 {
     //Generates a Huffman Tree based on the supplied Huffman Map.Recall that a 
     //Huffman Map contains a series of codes(e.g. 'a' = > 001).Each digit(0, 1) 
     //in a given code corresponds to a left branch for 0 and right branch for 1.
-    return nullptr;
+
+    //Base case.
+    if (huffmanMap.empty())
+    {
+        return nullptr;
+    }
+
+    HuffmanTree<char> *tree = new HuffmanTree<char>(new HuffmanInternalNode<char>(nullptr, nullptr));
+
+    for (auto ch : huffmanMap)
+    {
+        huffmanTreeFromMapHelper(tree, ch.first, ch.second);
+    }
+
+    return tree;
 }
+
 
 //PA #1 TODO: Generates a Huffman encoding map from the supplied Huffman tree
 //NOTE: I used a recursive helper function to solve this!

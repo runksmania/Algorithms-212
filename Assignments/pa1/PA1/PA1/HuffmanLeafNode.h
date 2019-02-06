@@ -24,6 +24,26 @@ public:
 	{
 		return true;
 	}
+
+    virtual HuffmanNode<T> *getLeftChild() const
+    {
+        return nullptr;
+    }
+
+    virtual HuffmanNode<T> *getRightChild() const
+    {
+        return nullptr;
+    }
+
+    virtual void setLeftChild(HuffmanNode<T> *node) 
+    {
+        return;
+    }
+
+    virtual void setRightChild(HuffmanNode<T> *node)
+    {
+        return;
+    }
 };
 
 #endif

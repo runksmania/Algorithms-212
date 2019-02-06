@@ -19,6 +19,17 @@ public:
 
 	//determines if node is a leaf or not
 	virtual bool isLeaf() = 0;
+
+    virtual HuffmanNode<T> *getLeftChild() const = 0;
+
+    virtual HuffmanNode<T> *getRightChild() const = 0;
+
+    virtual void setLeftChild(HuffmanNode<T> *node) = 0;
+
+    virtual void setRightChild(HuffmanNode<T> *node) = 0;
+
+    virtual const T &getValue() = 0;
+
 };
 
 #endif

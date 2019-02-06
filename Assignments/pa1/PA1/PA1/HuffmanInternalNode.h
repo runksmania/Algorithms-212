@@ -49,6 +49,11 @@ public:
 	{
 		_right_child = node;
 	}
+
+    virtual const T &getValue()
+    {
+        return NULL;
+    }
 };
 
 #endif

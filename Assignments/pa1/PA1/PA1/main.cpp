@@ -128,6 +128,102 @@ void pa1Test2()
 	cout << "decoded bits:" << endl << text << endl;
 }
 
+void treeTestHelper(HuffmanNode<char> *node)
+{
+    if (node == nullptr)
+    {
+        return;
+    }
+
+    if(node->isLeaf())
+    {
+        cout << "Char: " << node->getValue() << " Weight: " << node->getWeight() << endl;
+    }
+    else
+    {
+        treeTestHelper(node->getLeftChild());
+        treeTestHelper(node->getRightChild());
+    }
+
+    return;
+}
+
+void treeTest()
+{
+    vector<string> test = { "aaabbc" };
+    cout << "Testing Huffman Tree From strings:\n\n";
+
+    for (auto str : test)
+    {
+        cout << str << endl;
+    }
+
+    cout << "\nresult:\n";
+    HuffmanTree<char> *tree = PA1::huffmanTreeFromText(test);
+    treeTestHelper(tree->getRoot());
+    cout << endl;
+
+    test = { "aaabbc", "bbbcca", "cccaab" };
+    cout << "Testing Huffman Tree From strings:\n\n";
+
+    for (auto str : test)
+    {
+        cout << str << endl;
+    }
+
+    cout << "\nResult:\n";
+    delete tree;
+    tree = PA1::huffmanTreeFromText(test);
+    treeTestHelper(tree->getRoot());
+
+}
+
+void treeFromMapTestHelper(HuffmanNode<char> *node, string huffmanString, int counter)
+{
+    if (node == nullptr)
+    {
+        return;
+    }
+
+    if (node->isLeaf())
+    {
+        cout << ": " << node->getValue();
+        return;
+    }
+    else if (huffmanString[counter] == '0')
+    {
+        cout << "0";
+        treeFromMapTestHelper(node->getLeftChild(), huffmanString, ++counter);
+    }
+    else if (huffmanString[counter] == '1')
+    {
+        cout << "1";
+        treeFromMapTestHelper(node->getRightChild(), huffmanString, ++counter);
+    }
+}
+
+void treeFromMapTest()
+{
+    unordered_map<char, string> test =
+    {
+        {'a', "0"},
+        {'b', "10"},
+        {'c', "11"}
+    };
+
+    cout << "Testing Huffman Tree From map:\n\n";
+    HuffmanTree<char> *tree = PA1::huffmanTreeFromMap(test);
+
+    for (auto map : test)
+    {
+        cout << map.first << ": " << map.second << endl << endl;
+        cout << "Result: " << endl << endl;
+        treeFromMapTestHelper(tree->getRoot(), map.second, 0);
+        cout << "\n--------------" << endl << endl;
+    }
+    
+}
+
 //outputs PA1 exe usage
 void outputUsage()
 {
@@ -229,6 +325,12 @@ int main(int argc, char* argv[])
 			return 0;
 		}
 	}
+    else if (argc == 5)
+    {
+        treeTest();
+        cout << endl;
+        treeFromMapTest();
+    }
 	else
 	{
 		outputUsage();
