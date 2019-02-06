@@ -33,7 +33,6 @@ HuffmanTree<char>* PA1::huffmanTreeFromText(vector<string> data)
     //Builds a Huffman Tree from the supplied vector of strings.
     //This function implement's Huffman's Algorithm as specified in the
     //book.
-
     //In order for your tree to be the same as mine, you must take care 
     //to do the following:
     //1.	When merging the two smallest subtrees, make sure to place the 
@@ -45,25 +44,22 @@ HuffmanTree<char>* PA1::huffmanTreeFromText(vector<string> data)
     //maintains huffman tree forest 
     priority_queue < HuffmanTree<char>*, vector<HuffmanTree<char>*>, TreeComparer> forest{};
 
-    for (auto h : dataFreqMap)
+    for (auto kvp : dataFreqMap)
     {
-        HuffmanTree<char> *node = new HuffmanTree<char>(h.first, h.second);
-        forest.push(node);
+        forest.push(new HuffmanTree<char>(kvp.first, kvp.second));
     }
 
     while (forest.size() >= 2)
     {
+        //Get smallest and make it left child.
         HuffmanTree<char> *leftChild = forest.top();
         forest.pop();
+        
+        //Get next smallest and make it right child.
         HuffmanTree<char> *rightChild = forest.top();
-
-        if (leftChild->getWeight() > rightChild->getWeight())
-        {
-            leftChild = rightChild;
-            rightChild = forest.top();
-        }
-
         forest.pop();
+
+        //Merge the trees.
         HuffmanTree<char> *node = new HuffmanTree<char>(leftChild, rightChild);
         forest.push(node);
 
@@ -94,6 +90,7 @@ void huffmanTreeFromMapHelper(HuffmanTree<char> *tree, char ch, string binPathSt
 
     for (auto c : binPathStr)
     {
+        //0 means go left, 1 means go right.
         if (c == '0')
         {
             current = current->getLeftChild();
@@ -107,7 +104,7 @@ void huffmanTreeFromMapHelper(HuffmanTree<char> *tree, char ch, string binPathSt
             }
             else if (current == nullptr)
             {
-                //If we aren't at the end and the node doesn't exist, create it.
+                //If we aren't at the end and the node doesn't exist, create an internal node.
                 current = new HuffmanInternalNode<char>(nullptr, nullptr);
                 previous->setLeftChild(current);
             }
@@ -128,7 +125,7 @@ void huffmanTreeFromMapHelper(HuffmanTree<char> *tree, char ch, string binPathSt
             }
             else if (current == nullptr)
             {
-                //If we aren't at the end and the node doesn't exist, create it.
+                //If we aren't at the end and the node doesn't exist, create an internal node.
                 current = new HuffmanInternalNode<char>(nullptr, nullptr);
                 previous->setRightChild(current);
             }
@@ -161,23 +158,29 @@ HuffmanTree<char>* PA1::huffmanTreeFromMap(unordered_map<char, string> huffmanMa
 }
 
 
+void huffmanEncodingMapFromTreeHelper(unordered_map<char, string>& map, HuffmanNode<char>* node, string encoding)
+{
+    if (node->isLeaf() == false)
+    {
+        //If not a leaf make recursive calls.
+        huffmanEncodingMapFromTreeHelper(map, node->getLeftChild(), encoding += '0');
+        huffmanEncodingMapFromTreeHelper(map, node->getRightChild(), encoding  += '1');
+        return;
+    }
+    else
+    {
+        //Else we have a complete mapping for character.
+        map[node->getValue()] = encoding;
+        return;
+    }
+}
+
 //PA #1 TODO: Generates a Huffman encoding map from the supplied Huffman tree
 //NOTE: I used a recursive helper function to solve this!
 unordered_map<char, string> PA1::huffmanEncodingMapFromTree(HuffmanTree<char> *tree)
 {
-    HuffmanNode<char> *node = tree->getRoot();
-    if (node->isLeaf() == true)
-    {
-        HuffmanLeafNode<char> *leaf = dynamic_cast<HuffmanLeafNode<char> *>(node);
-        leaf = (HuffmanLeafNode<char> *)node;
-    }
-
-    //Generates a Huffman Map based on the supplied Huffman Tree.  Again, recall 
-    //that a Huffman Map contains a series of codes(e.g. 'a' = > 001).Each digit(0, 1) 
-    //in a given code corresponds to a left branch for 0 and right branch for 1.  
-    //As such, a given code represents a pre-order traversal of that bit of the 
-    //tree.  I used recursion to solve this problem.
     unordered_map<char, string> result{};
+    huffmanEncodingMapFromTreeHelper(result, tree->getRoot(), "");
     return result;
 }
 
