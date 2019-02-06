@@ -222,3 +222,67 @@
         - for some $e > 0$ and $af(n/b) <= cf(n)$
         - where $c < 1$ and all large $n$
         - then $T(n) = Θ(f(n))$
+
+## Greedy Algorithms
+  
+- Greedy Algorithms:
+  - Definition: For each deciision point do whatever makes the most sense/work at that point.
+    - Examples:
+      - should i take sleep slope or shallow?
+        - Steep
+      - take old arcata rd or 101 to get to Eureka
+        - 101
+  - Implicit assumption is we are trying to minimize expensive work.
+  - Many greedy algorithms use priority queues, or heaps to manage decision making.
+  - Cons:
+    - get caught in local maximums.
+      - stops whenever something goes against the solution.
+      - Example:
+        - **1-0 knapsack problem**
+          - fiven a bunch of stones with associated weights and values and a fixed-sized bag, how much value can we store?
+
+          | rocks | weight | value|
+          | ----- | ------ | ---- |
+          | rock1 |   5    |  10  |
+          | rock2 |   5    |  10  |
+          | rock3 |   7    |  15  |
+          | pack  |   10   |  -   |
+          - Greedy says grab rock 3, but best to grab both rock1 and rock2.
+          - Greedy inefficient.
+        - **Double knapsack problem**
+          - allowed to chisel off portions of the rock.
+
+          | rocks | weight | value|
+          | ----- | ------ | ---- |
+          | rock1 |   5    |  10  |
+          | rock2 |   5    |  10  |
+          | rock3 |   7    |  15  |
+          | rock3 |   7    |  15  |
+          | pack  |   10   |  -   |
+          - Greedy says take b and chisel 3lb off another b.
+          - Greedy is best.
+      - Huffman Coding
+        - Common compression algorithm for zip files.
+        - Uses binary trees and a greedy algorithm.
+        - Works by finding patterns in sequences.
+          - very acheivalbe in ascii
+          - consider ascii string 'aaa'
+          - binary version is 001100001 is a, thus 'aaa' is 001100001  001100001  001100001
+          - run a substitution algorithm with shortcut characters.
+          - thus if 'a' becomes single bit 0, the sequence then becomes 000, which is a savings of 21 bits or 87.5% compression
+          - goal map long wasteful bit sequences into shorter bit sequences.
+            - Example:
+              - String 'aaabbc', what binary mapping would yield shortest sequence.
+              - option 1: a = 01, b = 1, c = 0
+                - 010101110
+              - option 2: a = 0, b = 1, c = 01
+                - 0001101
+              Best to give most common characters the shortest mappings.
+          - **Algorithm**
+            - Step 1: build a frequency map of all unique chars in the file
+            - Step 2: build a forest based on fruqency distrubtion.
+              - each tree in forest has a value(char) and weight(frequency)
+            - Step 3: Until there exists a forest, merge forests based on weight.
+              - We will throw all forests in a min pq
+              - while the pq is not empty:
+                - pop off top two forests, merge. push resulting forest back onto pq.
