@@ -1,7 +1,12 @@
 #include "PA1.h"
 
-//Helper to make a huffman tree.
-//Outputs a hash table with the frequency of characters in the data.
+/// <summary>
+/// Helper to make a huffman tree.
+/// Maps the character frequency.
+///Outputs a hash table with the frequency of characters in the data.
+/// </summary>
+/// <param name="data">Vector of strings, which needs its frequency of characters within all strings mapped</param>
+/// <returns>Returns a hashTable with a int frequency of each character</returns>
 unordered_map<char, int> mapCharFrequency(const vector<string> data)
 {
     unordered_map<char, int> freqMap;
@@ -27,18 +32,14 @@ unordered_map<char, int> mapCharFrequency(const vector<string> data)
     return freqMap;
 }
 
+/// <summary>
+/// Builds a huffmans tree from a vector of strings.
+/// </summary>
+/// <param name="data">Vector of strings, which needs its frequency of characters within all strings mapped</param>
+/// <returns>Returns a huffman tree with frequencies of each character in data.</returns>
 HuffmanTree<char>* PA1::huffmanTreeFromText(vector<string> data)
 {
-
-    //Builds a Huffman Tree from the supplied vector of strings.
-    //This function implement's Huffman's Algorithm as specified in the
-    //book.
-    //In order for your tree to be the same as mine, you must take care 
-    //to do the following:
-    //1.	When merging the two smallest subtrees, make sure to place the 
-    //      smallest tree on the left side!
-    //store frequencies in hashtable
-
+    //Create data frequency map.
     unordered_map<char, int> dataFreqMap = mapCharFrequency(data);
 
     //maintains huffman tree forest 
@@ -70,6 +71,13 @@ HuffmanTree<char>* PA1::huffmanTreeFromText(vector<string> data)
     return forest.top();
 }
 
+/// <summary>
+/// Edits a huffman tree provided from calling function.
+/// Adds characters at the locations symbolized by the binPathStr
+/// </summary>
+/// <param name="tree">A huffman tree node.</param>
+/// <param name="ch">The character to insert into tree.</param>
+/// <param name="binPathStr">The binary path for the character.</param>
 void huffmanTreeFromMapHelper(HuffmanTree<char> *tree, char ch, string binPathStr)
 {
     //Base case.
@@ -135,29 +143,37 @@ void huffmanTreeFromMapHelper(HuffmanTree<char> *tree, char ch, string binPathSt
     }
 }
 
+/// <summary>
+/// Creates a huffman tree from a huffman map.
+/// </summary>
+/// <param name="huffmanMap">huffman map.</param>
+/// <returns>Returns a huffman tree created from the map given.</returns>
 HuffmanTree<char>* PA1::huffmanTreeFromMap(unordered_map<char, string> huffmanMap)
 {
-    //Generates a Huffman Tree based on the supplied Huffman Map.Recall that a 
-    //Huffman Map contains a series of codes(e.g. 'a' = > 001).Each digit(0, 1) 
-    //in a given code corresponds to a left branch for 0 and right branch for 1.
-
     //Base case.
     if (huffmanMap.empty())
     {
         return nullptr;
     }
 
+    //Create a new tree.
     HuffmanTree<char> *tree = new HuffmanTree<char>(new HuffmanInternalNode<char>(nullptr, nullptr));
 
-    for (auto ch : huffmanMap)
+    for (auto kvp : huffmanMap)
     {
-        huffmanTreeFromMapHelper(tree, ch.first, ch.second);
+        //Pass tree and each kvp to the helper function, which will add the kvp to the tree.
+        huffmanTreeFromMapHelper(tree, kvp.first, kvp.second);
     }
 
     return tree;
 }
 
-
+/// <summary>
+/// Helper function to make an encoding map from a huffman tree.
+/// </summary>
+/// <param name="map">The encoding map to change.</param>
+/// <param name="node">A node of the huffman tree.</param>
+/// <param name="encoding">The current encoding string path.</param>
 void huffmanEncodingMapFromTreeHelper(unordered_map<char, string>& map, HuffmanNode<char>* node, string encoding)
 {
     if (node->isLeaf() == false)
@@ -175,8 +191,11 @@ void huffmanEncodingMapFromTreeHelper(unordered_map<char, string>& map, HuffmanN
     }
 }
 
-//PA #1 TODO: Generates a Huffman encoding map from the supplied Huffman tree
-//NOTE: I used a recursive helper function to solve this!
+/// <summary>
+/// Creates and returns a encoding map from a huffman tree.
+/// </summary>
+/// <param name="tree">A huffman tree.</param>
+/// <returns>Returns an encoding map of characters in the tree.</returns>
 unordered_map<char, string> PA1::huffmanEncodingMapFromTree(HuffmanTree<char> *tree)
 {
     unordered_map<char, string> result{};
