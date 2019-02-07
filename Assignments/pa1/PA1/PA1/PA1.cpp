@@ -257,7 +257,10 @@ unordered_map<char, string> PA1::readEncodingMapFromFile(string file_name)
             //Input encoding into encoding map,
             //First character is the character that's encoded.
             //The rest is the encoding to that character.
-            encodingMap[currentLine[0]] = currentLine.substr(1, currentLine.size() - 1);
+            if (currentLine.size() > 1)
+            {
+                encodingMap[currentLine[0]] = currentLine.substr(1, currentLine.size() - 1);
+            }
         }
     }
     else
@@ -269,15 +272,54 @@ unordered_map<char, string> PA1::readEncodingMapFromFile(string file_name)
     return encodingMap;
 }
 
+
+string decodeBitsHelper(HuffmanNode<char>* const root, vector<bool> bits)
+{
+    //Base cases.
+    if (root == nullptr)
+    {
+        return "";
+    }
+    else if (bits.size() < 1)
+    {
+        return "";
+    }
+
+    string decodedString;
+    HuffmanNode<char>* current = root;
+
+    for (auto bit : bits)
+    {
+        if (bit == false)
+        {
+            //If false go left.
+            current = current->getLeftChild();
+        }
+        else
+        {
+            //Else go right.
+            current = current->getRightChild();
+        }
+
+        if (current->isLeaf())
+        {
+            //If leaf add value to decoded string and restart at root.
+            decodedString += current->getValue();
+            current = root;
+        }
+    }
+    
+    return decodedString;
+}
+
 //PA #1 TODO: Converts a vector of bits (bool) back into readable text using the supplied Huffman map
 string PA1::decodeBits(vector<bool> bits, unordered_map<char, string> huffmanMap)
 {
-    //Uses the supplied Huffman Map to convert the vector of bools (bits) back into text.
-    //To solve this problem, I converted the Huffman Map into a Huffman Tree and used 
-    //tree traversals to convert the bits back into text.
-
-    huffmanTreeFromMap(huffmanMap);
+    //Create tree from map.
+    HuffmanTree<char>* tree = huffmanTreeFromMap(huffmanMap);
     ostringstream result{};
+
+    result << decodeBitsHelper(tree->getRoot(), bits);
 
     return result.str();
 }
