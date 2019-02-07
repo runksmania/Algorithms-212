@@ -203,20 +203,70 @@ unordered_map<char, string> PA1::huffmanEncodingMapFromTree(HuffmanTree<char> *t
     return result;
 }
 
-//PA #1 TODO: Writes an encoding map to file.  Needed for decompression.
+/// <summary>
+/// Writes an encoding map to the filename provided.
+/// Writes it as single line per kvp like "A001".
+/// Where A is the char, and 001 is the encoding.
+/// </summary>
+/// <param name="huffmanMap">Ahuffman map.</param>
+/// <param name="file_name">Name of the file to write to.</param>
 void PA1::writeEncodingMapToFile(unordered_map<char, string> huffmanMap, string file_name)
 {
-    //Writes the supplied encoding map to a file.  My map file has one 
-    //association per line (e.g. 'a' and 001 would yield the line "a001")
+    //If empty, nothing to write so return.
+    if (huffmanMap.empty())
+    {
+        return;
+    }
+
+    ofstream outputFile{ file_name };
+
+    if (outputFile.good())
+    {
+        for (auto kvp : huffmanMap)
+        {
+            outputFile << kvp.first << kvp.second << endl;
+        }
+    }
+    else
+    {
+        cout << "Error creating output file.";
+        return;
+    }
 }
 
-//PA #1 TODO: Reads an encoding map from a file.  Needed for decompression.
+/// <summary>
+/// Reads an huffman encoding file and puts it into an encoding map.
+/// </summary>
+/// <param name="file_name">Name of the file.</param>
+/// <returns>Returns an huffman encoding map.</returns>
 unordered_map<char, string> PA1::readEncodingMapFromFile(string file_name)
 {
-    //Creates a Huffman Map from the supplied file.Essentially, this is the 
-    //inverse of writeEncodingMapToFile.  
-    unordered_map<char, string> result{};
-    return result;
+    //Creates a Huffman Map from the supplied file.
+    //this is the inverse of writeEncodingMapToFile.
+    ifstream inputFile{ file_name };
+    unordered_map<char, string> encodingMap{};
+
+    if (inputFile.good())
+    {
+        string currentLine;
+
+        while (inputFile.good())
+        {
+            getline(inputFile, currentLine);
+
+            //Input encoding into encoding map,
+            //First character is the character that's encoded.
+            //The rest is the encoding to that character.
+            encodingMap[currentLine[0]] = currentLine.substr(1, currentLine.size() - 1);
+        }
+    }
+    else
+    {
+        cout << "Error opening input file";
+        return encodingMap;
+    }
+
+    return encodingMap;
 }
 
 //PA #1 TODO: Converts a vector of bits (bool) back into readable text using the supplied Huffman map
@@ -225,13 +275,47 @@ string PA1::decodeBits(vector<bool> bits, unordered_map<char, string> huffmanMap
     //Uses the supplied Huffman Map to convert the vector of bools (bits) back into text.
     //To solve this problem, I converted the Huffman Map into a Huffman Tree and used 
     //tree traversals to convert the bits back into text.
+
+    huffmanTreeFromMap(huffmanMap);
     ostringstream result{};
+
     return result.str();
 }
 
-//PA #1 TODO: Using the supplied Huffman map compression, converts the supplied text into a series of bits (boolean values)
+/// <summary>
+/// Compresses text based on the huffman map to a vector of bools.
+/// True is 1, false is 0.
+/// </summary>
+/// <param name="text">The text.</param>
+/// <param name="huffmanMap">The huffman map.</param>
+/// <returns></returns>
 vector<bool> PA1::toBinary(vector<string> text, unordered_map<char, string> huffmanMap)
 {
     vector<bool> result{};
+
+    if (text.size() > 1 && huffmanMap.size() > 1)
+    {
+        for (auto str : text)
+        {
+            for (auto ch : str)
+            {
+                //Get value for character.
+                string value = huffmanMap[ch];
+
+                for (auto binStr : value)
+                {
+                    if (binStr = '0')
+                    {
+                        result.push_back(false);
+                    }
+                    else
+                    {
+                        result.push_back(true);
+                    }
+                }
+            }
+        }
+    }
+    
     return result;
 }
