@@ -96,14 +96,16 @@ void huffmanTreeFromMapHelper(HuffmanTree<char> *tree, char ch, string binPathSt
     HuffmanNode<char> *previous = tree->getRoot();
     HuffmanNode<char> *current = previous;
 
-    for (auto c : binPathStr)
+    for (int i = 0; i < binPathStr.size(); i++)
     {
+        char binPathChar = binPathStr[i];
+
         //0 means go left, 1 means go right.
-        if (c == '0')
+        if (binPathChar == '0')
         {
             current = current->getLeftChild();
 
-            if (current == nullptr && c == binPathStr[binPathStr.size() - 1])
+            if (current == nullptr && i == binPathStr.size() - 1)
             {
                 //If we are at the end and the leaf doesn't exist, create it.
                 current = new HuffmanLeafNode<char>(ch, 0);
@@ -120,11 +122,11 @@ void huffmanTreeFromMapHelper(HuffmanTree<char> *tree, char ch, string binPathSt
             previous = current;
 
         }
-        else if (c == '1')
+        else if (binPathChar == '1')
         {
             current = current->getRightChild();
 
-            if (current == nullptr && c == binPathStr[binPathStr.size() - 1])
+            if (current == nullptr && i == binPathStr.size() - 1)
             {
                 //If we are at the end and the leaf doesn't exist, create it.
                 current = new HuffmanLeafNode<char>(ch, 0);
@@ -285,7 +287,7 @@ string decodeBitsHelper(HuffmanNode<char>* const root, vector<bool> bits)
         return "";
     }
 
-    string decodedString;
+    string decodedString ="";
     HuffmanNode<char>* current = root;
 
     for (auto bit : bits)
