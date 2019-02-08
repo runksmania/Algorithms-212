@@ -275,6 +275,12 @@ unordered_map<char, string> PA1::readEncodingMapFromFile(string file_name)
 }
 
 
+/// <summary>
+/// Helper function to decode bits.
+/// </summary>
+/// <param name="root">Root node of a Huffman Tree.</param>
+/// <param name="bits">The bits to decode</param>
+/// <returns>Returns a decoded string based on the huffman tree and the bits.</returns>
 string decodeBitsHelper(HuffmanNode<char>* const root, vector<bool> bits)
 {
     //Base cases.
@@ -314,7 +320,13 @@ string decodeBitsHelper(HuffmanNode<char>* const root, vector<bool> bits)
     return decodedString;
 }
 
-//PA #1 TODO: Converts a vector of bits (bool) back into readable text using the supplied Huffman map
+
+/// <summary>
+/// Decodes a vector of bools into text.
+/// </summary>
+/// <param name="bits">The bits.</param>
+/// <param name="huffmanMap">The huffman map.</param>
+/// <returns>A decoded string based on the bits and huffman map.</returns>
 string PA1::decodeBits(vector<bool> bits, unordered_map<char, string> huffmanMap)
 {
     //Create tree from map.
