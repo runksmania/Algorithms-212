@@ -179,8 +179,8 @@ void huffmanEncodingMapFromTreeHelper(unordered_map<char, string>& map, HuffmanN
     if (node->isLeaf() == false)
     {
         //If not a leaf make recursive calls.
-        huffmanEncodingMapFromTreeHelper(map, node->getLeftChild(), encoding += '0');
-        huffmanEncodingMapFromTreeHelper(map, node->getRightChild(), encoding  += '1');
+        huffmanEncodingMapFromTreeHelper(map, node->getLeftChild(), encoding + '0');
+        huffmanEncodingMapFromTreeHelper(map, node->getRightChild(), encoding  + '1');
         return;
     }
     else
@@ -330,12 +330,13 @@ string PA1::decodeBits(vector<bool> bits, unordered_map<char, string> huffmanMap
 /// </summary>
 /// <param name="text">The text.</param>
 /// <param name="huffmanMap">The huffman map.</param>
-/// <returns></returns>
+/// <returns>Returns a vector of bools that is a compressed form of text based off huffmanMap.</returns>
 vector<bool> PA1::toBinary(vector<string> text, unordered_map<char, string> huffmanMap)
 {
     vector<bool> result{};
 
-    if (text.size() > 1 && huffmanMap.size() > 1)
+    //Make text and huffmanMap are not empty.
+    if (text.size() > 0 && huffmanMap.size() > 0)
     {
         for (auto str : text)
         {
@@ -346,7 +347,7 @@ vector<bool> PA1::toBinary(vector<string> text, unordered_map<char, string> huff
 
                 for (auto binStr : value)
                 {
-                    if (binStr = '0')
+                    if (binStr == '0')
                     {
                         result.push_back(false);
                     }
