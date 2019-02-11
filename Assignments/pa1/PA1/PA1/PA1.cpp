@@ -231,7 +231,7 @@ void huffmanEncodingMapFromTreeHelper(unordered_map<char, string>& map, HuffmanN
 /// <returns>Returns an encoding map of characters in the tree.</returns>
 unordered_map<char, string> PA1::huffmanEncodingMapFromTree(HuffmanTree<char> *tree)
 {
-    //Time-Complexity: O(N)
+    //Time-Complexity: O(Log(N))
     //Space-Complexity: O(N)
     //With N being the # of unique characters in the tree.
 
