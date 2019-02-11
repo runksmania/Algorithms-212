@@ -1,3 +1,13 @@
+/*
+Assignment: PA1
+Description: Perform and analyze Hoffman's compression algorithm.
+Author: Michael Cottrell
+HSU ID: 946839472
+Completion Time: 8 hours.
+In completing this program, I received help from the following people:
+N/A
+*/
+
 #include "HuffmanTree.h"
 #include <fstream>
 #include <iostream>

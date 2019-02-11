@@ -1,3 +1,13 @@
+/*
+Assignment: PA1
+Description: Perform and analyze Hoffman's compression algorithm.
+Author: Michael Cottrell
+HSU ID: 946839472
+Completion Time: 8 hours.
+In completing this program, I received help from the following people:
+N/A
+*/
+
 #include "PA1.h"
 
 /// <summary>
@@ -9,6 +19,10 @@
 /// <returns>Returns a hashTable with a int frequency of each character</returns>
 unordered_map<char, int> mapCharFrequency(const vector<string> data)
 {
+    //Time-Complexity: O(N)    
+    //Space-Complexity: O(N)
+    //With N being the # of unique characters in data.
+
     unordered_map<char, int> freqMap;
 
     for (auto str : data)
@@ -39,6 +53,11 @@ unordered_map<char, int> mapCharFrequency(const vector<string> data)
 /// <returns>Returns a huffman tree with frequencies of each character in data.</returns>
 HuffmanTree<char>* PA1::huffmanTreeFromText(vector<string> data)
 {
+    //Time-Complexity: O(N + Log(N) + (N) * Log(N)) = O(N*Log(N))
+    //mapCharFrequency: O(N) + priority_queue.push: O(Log(N)) + while loop: O(N) * priority_queue.push: O(Log(N))
+    //Space-Complexity: O(N)
+    //With N being the # of unique characters in data.
+
     //Create data frequency map.
     unordered_map<char, int> dataFreqMap = mapCharFrequency(data);
 
@@ -60,7 +79,7 @@ HuffmanTree<char>* PA1::huffmanTreeFromText(vector<string> data)
         HuffmanTree<char> *rightChild = forest.top();
         forest.pop();
 
-        //Merge the trees.
+        //Merge the trees and push back into queue.
         HuffmanTree<char> *node = new HuffmanTree<char>(leftChild, rightChild);
         forest.push(node);
 
@@ -80,6 +99,10 @@ HuffmanTree<char>* PA1::huffmanTreeFromText(vector<string> data)
 /// <param name="binPathStr">The binary path for the character.</param>
 void huffmanTreeFromMapHelper(HuffmanTree<char> *tree, char ch, string binPathStr)
 {
+    //Time-Complexity: O(N)  
+    //Space-Complexity: O(N)
+    //With N being the length of binary path.
+
     //Base case.
     if (binPathStr.size() < 1)
     {
@@ -152,6 +175,10 @@ void huffmanTreeFromMapHelper(HuffmanTree<char> *tree, char ch, string binPathSt
 /// <returns>Returns a huffman tree created from the map given.</returns>
 HuffmanTree<char>* PA1::huffmanTreeFromMap(unordered_map<char, string> huffmanMap)
 {
+    //Time-Complexity: (N)
+    //Space-Complexity: O(N)
+    //With N being the # of unique characters in the huffmanMap.
+
     //Base case.
     if (huffmanMap.empty())
     {
@@ -178,6 +205,10 @@ HuffmanTree<char>* PA1::huffmanTreeFromMap(unordered_map<char, string> huffmanMa
 /// <param name="encoding">The current encoding string path.</param>
 void huffmanEncodingMapFromTreeHelper(unordered_map<char, string>& map, HuffmanNode<char>* node, string encoding)
 {
+    //Time-Complexity: T(N) = 2(N/2) + 1.  O(N)
+    //Space-Complexity: O(N)
+    //With N being the # of unique characters in the original call's tree.
+
     if (node->isLeaf() == false)
     {
         //If not a leaf make recursive calls.
@@ -200,6 +231,10 @@ void huffmanEncodingMapFromTreeHelper(unordered_map<char, string>& map, HuffmanN
 /// <returns>Returns an encoding map of characters in the tree.</returns>
 unordered_map<char, string> PA1::huffmanEncodingMapFromTree(HuffmanTree<char> *tree)
 {
+    //Time-Complexity: O(N)
+    //Space-Complexity: O(N)
+    //With N being the # of unique characters in the tree.
+
     unordered_map<char, string> result{};
     huffmanEncodingMapFromTreeHelper(result, tree->getRoot(), "");
     return result;
@@ -214,6 +249,10 @@ unordered_map<char, string> PA1::huffmanEncodingMapFromTree(HuffmanTree<char> *t
 /// <param name="file_name">Name of the file to write to.</param>
 void PA1::writeEncodingMapToFile(unordered_map<char, string> huffmanMap, string file_name)
 {
+    //Time-Complexity: O(N)
+    //Space-Complexity: O(N)
+    //With N being the # of unique characters in the huffmanMap.
+
     //If empty, nothing to write so return.
     if (huffmanMap.empty())
     {
@@ -243,6 +282,10 @@ void PA1::writeEncodingMapToFile(unordered_map<char, string> huffmanMap, string 
 /// <returns>Returns an huffman encoding map.</returns>
 unordered_map<char, string> PA1::readEncodingMapFromFile(string file_name)
 {
+    //Time-Complexity: O(N)
+    //Space-Complexity: O(N)
+    //With N being the # of unique characters in the encoding map.
+
     //Creates a Huffman Map from the supplied file.
     //this is the inverse of writeEncodingMapToFile.
     ifstream inputFile{ file_name };
@@ -283,6 +326,10 @@ unordered_map<char, string> PA1::readEncodingMapFromFile(string file_name)
 /// <returns>Returns a decoded string based on the huffman tree and the bits.</returns>
 string decodeBitsHelper(HuffmanNode<char>* const root, vector<bool> bits)
 {
+    //Time-Complexity: O(N)
+    //Space-Complexity: O(N)
+    //With N being the # of bits in the vector bits.
+
     //Base cases.
     if (root == nullptr)
     {
@@ -329,6 +376,10 @@ string decodeBitsHelper(HuffmanNode<char>* const root, vector<bool> bits)
 /// <returns>A decoded string based on the bits and huffman map.</returns>
 string PA1::decodeBits(vector<bool> bits, unordered_map<char, string> huffmanMap)
 {
+    //Time-Complexity: O(N)
+    //Space-Complexity: O(N)
+    //With N being the # of unique characters in the huffmanMap.
+
     //Create tree from map.
     HuffmanTree<char>* tree = huffmanTreeFromMap(huffmanMap);
     ostringstream result{};
@@ -347,6 +398,11 @@ string PA1::decodeBits(vector<bool> bits, unordered_map<char, string> huffmanMap
 /// <returns>Returns a vector of bools that is a compressed form of text based off huffmanMap.</returns>
 vector<bool> PA1::toBinary(vector<string> text, unordered_map<char, string> huffmanMap)
 {
+    //Time-Complexity: O(N * M)
+    //Space-Complexity: O(N)
+    //With N being the # of unique characters in the text.
+    //M being the number of bits representing that character.
+
     vector<bool> result{};
 
     //Make text and huffmanMap are not empty.
