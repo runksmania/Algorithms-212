@@ -1,6 +1,7 @@
 import csv
 from Graph import Graph
 
+
 def process_csv(file_name):
     data = []
     
@@ -12,13 +13,14 @@ def process_csv(file_name):
 
     return data
 
-result = process_csv("./resource files/data.csv")
+result = process_csv("./resource files/distances.csv")
 graph = Graph()
 
 for row in result:
     graph.add_vertex(row[0])
     graph.connect_vertex(row[0], row[1], row[2], True)
 
-shortest = graph.compute_shortest_path('a');
+shortest = graph.compute_shortest_path('A');
 
-print('done')
+for i in shortest:
+    print(i + ": " + str(shortest[i] / 60))

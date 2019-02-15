@@ -55,6 +55,6 @@ class Graph:
                     #Push children
                     for edge, weight in self._graph[key].items():
                         if not edge in distances:
-                            heappush(to_visit, (weight + top[0], edge))
+                            heappush(to_visit, (float(weight) + top[0], edge))
 
         return distances
