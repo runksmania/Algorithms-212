@@ -1,5 +1,5 @@
 import csv
-from Graph import Graph
+from graph import Graph
 
 
 def process_csv(file_name):
