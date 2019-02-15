@@ -21,7 +21,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="source code\Graph.py">
+    <Compile Include="source code\graph.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="source code\main.py" />
@@ -32,6 +32,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="resource files\data.csv" />
+    <Content Include="resource files\distances.csv" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

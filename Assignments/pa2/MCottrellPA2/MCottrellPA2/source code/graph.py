@@ -36,7 +36,8 @@ class Graph:
 
             #Push starting location
             #By default python will sort PQ by first value in Tuple
-            heappush(to_visit, (0, start))
+            #Our tuple has a second tuple which stores the edge and its current path from start
+            heappush(to_visit, (0, (start, "")))
 
             #While PQ is not empty
             while len(to_visit) > 0:
@@ -45,16 +46,19 @@ class Graph:
                 top = heappop(to_visit)
 
                 #2nd itm is our key
-                key = top[1]
+                key = top[1][0]
 
                 if not key in distances:
 
                     #Record distance
-                    distances[key] = top[0]
+                    distances[key] = (top[0], top[1][1])
 
                     #Push children
                     for edge, weight in self._graph[key].items():
                         if not edge in distances:
-                            heappush(to_visit, (float(weight) + top[0], edge))
+                            
+                            #Push into the heap a tuple with the weight from the path until now.
+                            #And push a tuple with the edge, and the previous path with the current edge.
+                            heappush(to_visit, (float(weight) + top[0], (edge, top[1][1] + " " + edge)))
 
         return distances
