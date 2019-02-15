@@ -31,34 +31,39 @@ class Graph:
         #Make sure start is in graph.
         if start in self._graph:
 
-            #Define PQ
+            #Define PQ.
             to_visit = []
 
-            #Push starting location
-            #By default python will sort PQ by first value in Tuple
-            #Our tuple has a second tuple which stores the edge and its current path from start
+            #Push starting location.
+            #Our tuple has a second tuple which stores the edge and its current path from start.
+            #Which in this case is empty.
             heappush(to_visit, (0, (start, "")))
 
-            #While PQ is not empty
+            #While PQ is not empty.
             while len(to_visit) > 0:
 
-                #Pop returns item in Python
+                #Pop top vertex.
                 top = heappop(to_visit)
 
-                #2nd itm is our key
+                #First item of the inner tuple is our edge name key. 
                 key = top[1][0]
 
                 if not key in distances:
 
-                    #Record distance
+                    #Push a tuple containing:
+                    #    1. The distance to get here.
+                    #    2. The path taken to get here.
                     distances[key] = (top[0], top[1][1])
 
                     #Push children
                     for edge, weight in self._graph[key].items():
                         if not edge in distances:
                             
-                            #Push into the heap a tuple with the weight from the path until now.
-                            #And push a tuple with the edge, and the previous path with the current edge.
+                            #Push into the heap a tuple containing:
+                            #    1. The weight of this edge + previous path's weight.
+                            #    2. A tuple containing:
+                            #        I. The edge name to be our lookup key.
+                            #        II. The path to this edge + this edge name.
                             heappush(to_visit, (float(weight) + top[0], (edge, top[1][1] + " " + edge)))
 
         return distances
