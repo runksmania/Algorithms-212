@@ -55,7 +55,7 @@ class Graph:
                     #    2. The path taken to get here.
                     distances[key] = (top[0], top[1][1])
 
-                    #Push children
+                    #Push children onto heap if not seen before.
                     for edge, weight in self._graph[key].items():
                         if not edge in distances:
                             
