@@ -10,12 +10,9 @@ for row in distances:
     graph.add_vertex(row[0])
     graph.connect_vertex(row[0], row[1], row[2], False)
 
-shortest = graph.compute_shortest_path('A');
+node_building_tuple = designations.building_lookup('jvd')
 
-for i in shortest:
-    print(i + ": " + str(shortest[i][0]))
+if node_building_tuple != False:
+    print("true")
+    shortest = graph.compute_shortest_path(node_building_tuple[0])
     
-    if shortest[i][1] == "":
-        print("Path: None")
-    else:
-        print("Path: " + shortest[i][1])
