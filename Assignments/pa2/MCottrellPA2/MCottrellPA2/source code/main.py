@@ -1,22 +1,12 @@
-import csv
+from csv_processor import process_csv
 from graph import Graph
+from node_building_connector import NodeBuildingConnector
 
-
-def process_csv(file_name):
-    data = []
-    
-    with open(file_name, 'r') as some_file:
-        csv_file = csv.reader(some_file, delimiter=',', quotechar='"')
-
-        for row in csv_file:
-            data.append(row)
-
-    return data
-
-result = process_csv("./resource files/distances.csv")
+distances = process_csv("./resource files/distances.csv")
 graph = Graph()
+designations = NodeBuildingConnector("./resource files/campusDesignations.csv")
 
-for row in result:
+for row in distances:
     graph.add_vertex(row[0])
     graph.connect_vertex(row[0], row[1], row[2], False)
 

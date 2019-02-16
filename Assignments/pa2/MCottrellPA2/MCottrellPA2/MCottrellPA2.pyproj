@@ -21,16 +21,23 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="source code\csv_processor.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="source code\graph.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="source code\main.py" />
+    <Compile Include="source code\node_building_connector.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="source code\" />
     <Folder Include="resource files\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="resource files\campusDesignations.csv" />
     <Content Include="resource files\data.csv" />
     <Content Include="resource files\distances.csv" />
   </ItemGroup>
