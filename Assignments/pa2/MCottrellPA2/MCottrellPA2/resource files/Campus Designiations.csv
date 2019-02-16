@@ -1,22 +1,22 @@
 Node Name,Building Code,Building Name
 A,CC,Canyon Complex
-A,CEDAR,Cedar
-A,ALDER,Alder
-A,CHINQ,Chinquapin
-A,HEMLC,Hemlock
-A,MADRN,Madrone
-A,MAPLE,Maple
-A,PEPR,Pepperwood
-A,TANOAK,Tan Oak
+A,CEDAR,Cedar Residence Hall
+A,ALDER,Alder Residence Hall
+A,CHINQ,Chinquapin Residence Hall
+A,HEMLC,Hemlock Residence Hall
+A,MADRN,Madrone Residence Hall
+A,MAPLE,Maple Residence Hall
+A,PEPR,Pepperwood Residence Hall
+A,TANOK,Tan Oak Residence Hall
 B,CREEK,Creekview Complex
-B,JUNIP,Juniper
-B,FERN,Fern
-B,LAURE,Laurel
+B,JUNIP,Juniper Residence Hall
+B,FERN,Fern Residence Hall
+B,LAURE,Laurel Residence Hall
 B,CREEK,Creekside Lounge
-B,WILLO,Willow
+B,WILLO,Willow Residence Hall
 C,JGC,Jolly Giant Commons
-D,REDWO,Redwood Hall
-D,SUNST,Sunset Hall
+D,REDWO,Redwood Residence Hall
+D,SUNST,Sunset Residence Hall
 D,HILL,The Hill
 E,CYPRS,Cypress Hall
 F,FWH,Feuerwerker House
@@ -27,8 +27,10 @@ I,HAH,Hagopian House (Yes)
 I,BRH,Brero House (ITEPP)
 I,LAPT,Little Apartments
 J,UC,University Center
+J,UCQ,University Quad
 K,HC,Student Health & Counseling
 L,LIB,Library
+L,LIB,Library Circle
 M,VMH,Van Matre Hall
 N,SH,Siemens Hall
 O,RB,Redwood Bowl
@@ -36,15 +38,26 @@ P,MUSA,Music A
 Q,UPF,Upper Playing Field
 R,MUSB,Music B
 R,ARTB,Art B
+R,ARTQ,Art Quad
 S,HH,Hadley House
 S,BALH,Balabanis House (MCC)
 T,RWC,Recreation & Wellness Center
+T,RP,Redwood Plaza
 U,TH,Telonicher House
+U,JVD,Van Duzer Theatre
+U,TA,Theatre Arts
 V,ARTA,Art A
 W,WH,Warren House
 W,BHH,Bret Harte House
 X,SCLPT,Sculpture Lab
+X,CA,Campus Apartments
+X,WAGH,Wagner House
+X,CERAM,Ceramics Lab
 Y,GH,Gist Hall
+Y,PARK,Parking Kiosk
+Y,JH,Jenkins Hall
+Y,BROH,Brookins House
+Y,GRNH,Experimental Greenhouse
 Z,SCIA,Science A
 A2,SRC,Student Recreation Center
 B2,KA,Kinesiology & Athletics
@@ -52,25 +65,27 @@ C2,FGYM,Forbes Gym
 D2,SCIB,Science B
 D2,SCIC,Science C
 D2,SCID,Science D
+D2,SCIE,Dennis K. Walker Greenhouse
 E2,SBS,Student & Business Services
 F2,CCC,College Creek Complex
-F2,CCC,College Creek Field
+F2,CCF,College Creek Field
 F2,DELNO,Del Norte
-F2,SHAST,Shasta
-F2,CCFLR,Commity Center
+F2,SHAST,Shasta Residence Hill
+F2,CCCTR,Community Center
 G2,CDL,Child Development Lab
 G2,HGH,Harry Griffith Hall
-H2,MENDO,Mendocino
-H2,TRIN,Trinity
+H2,MENDO,Mendocino Residence Hall
+H2,TRIN,Trinity Residence Hall
 I2,CEF,Campus Events Field
 J2,WDFS,Wildlife & Fisheries
 K2,MWCC,Marine Wildlife Care Center
 L2,FSH,Fish Hatchery
 L2,WGP,Wildlife Game Pens
 M2,NR,Natural Resources
-N2,SRC,Shipping & Receiving
+N2,SR,Shipping & Receiving
 N2,FM,Facilities Management
 O2,BOAT,Boat facility
+O2,REDWOL,Redwood Sciences Lab
 P2,BSS,Behavioral & Social Sciences
 P2,BUCH,Buck House (CCAT)
 P2,NAF,Native American Forum
@@ -79,6 +94,7 @@ Q2,WWH,Walter Warren House (INRSEP)
 Q2,TOD,Toddler Center
 Q2,BH,Baiocchi House
 Q2,MWH,Mary Warren House
-R2,FOR,Forestry
+R2,FR,Forestry
 S2,ANEX,Trinity Annex
 T2,SERC,Schatz Energy Research Center
+T2,Jenh,Jensen House (Children's Center)
