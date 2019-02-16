@@ -1,19 +1,19 @@
 Node Pair,Direction,Street
-AB,,
-AC,,
-AD,,
-AE,,
-A2B2,,
-A2C2,,
-A2O,,
-A2Q,,
-BA,,
-BD,,
-BE,,
-BH,,
-B2A2,,
-B2C2,,
-B2K2,,
+AB,E,on Granite Ave
+AC,S,on a direct route
+AD,S,on a direct route past JGC and then head West
+AE,S,on a direct route past JGC and then head East
+A2B2,S,on a direct route
+A2C2,SW,across Redwood Plaza
+A2O,NW,across Redwood Plaza
+A2Q,NE,on a direct route
+BA,W,on Granite Ave
+BD,W,on Granite Ave past JGC and then head West
+BE,W,on Granite Ave past JGC and then head East
+BH,W,on Granite Ave past JGC and then head Eest past University Center
+B2A2,N,on a direct route
+B2C2,NW,on a direct route
+B2K2,S,on Union Street
 B2Q,,
 B2Y,,
 BSC2,,
