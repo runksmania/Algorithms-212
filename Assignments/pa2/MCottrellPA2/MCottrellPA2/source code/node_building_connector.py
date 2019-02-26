@@ -1,6 +1,22 @@
+#
+#Assignment: PA2
+#Description: Perform and analyze Dijkstra's shortest path algorithm with the HSU Campus.
+#Author: Michael Cottrell
+#HSU ID: 946839472
+#Completion Time: 5 hours.
+#In completing this program, I received help from the following people:
+#N/A
+#
+
 from csv_processor import process_csv
 
 class NodeBuildingConnector:
+
+    #Constructor
+    #Creates two hash tables from a csv file that has the relationship between buildings and nodes.
+    #Time Complexity: O(N)
+    #Space Complexity: O(N)
+    #N = number of lines in the csv
     def __init__(self, file_name):
         designations_array = process_csv(file_name)
         
@@ -34,6 +50,9 @@ class NodeBuildingConnector:
                     #If it does exist append the array with the buildling.
                     self._node_building_ht[row[0]].append(row[2])
              
+    #Looks up the building code and returns a tuple if found false if not found.
+    #Time Complexity: O(1)
+    #Space Complexity: O(1)
     def building_lookup(self, build_code):
         build_code = build_code.upper()
 
@@ -43,6 +62,9 @@ class NodeBuildingConnector:
         else:
             return False
 
+    #Looks up buildings connected to a node.  Returns a list if found false if not found.
+    #Time Complexity: O(1)
+    #Space Complexity: O(1)
     def node_lookup(self, node):
 
         if node in self._node_building_ht:
