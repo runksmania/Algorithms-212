@@ -3,33 +3,36 @@ from graph import Graph
 from heapq import *
 
 print('***Route Planner***\nNote all input files will assumed to be in the resourceFiles directory.')
-map_file = process_csv('resourceFiles/' + input('Enter map file: '))
-delivery_file = process_csv('resourceFiles/' + input('Enter delivery file: '))
+map_data = process_csv('resourceFiles/' + input('Enter map file: '))
+delivery_data = process_csv('resourceFiles/' + input('Enter delivery file: '))
 
 g = Graph()
-
-for i in map_file:
-    
-    #First index is a node.
-    g.add_vertex(i[0])
-
-    #Second index is connected node, Third index is weight.
-    g.connect_vertex(i[0], i[1], i[2], True)
-
 deliveries = {}
-for i in delivery_file:
-    deliveries[i[0]] = 0
+
+for i in delivery_data:
+  deliveries[i[0]] = 0
+
+start = delivery_data[0][0]
+deliveries[start] = 1
+
+for i in map_data:
+  g.add_vertex(i[0])
+  g.connect_vertex(i[0], i[1], i[2], True)
 
 total_time = 0
-path = []
+path = {}
 
-for i in deliveries:
-    pq = []
-    distances = g.compute_shortest_path(i[0])
-    
-    for k,v in distances.items():
-        if k not in path and k in deliveries:
-            heappush(pq, (v[0], v[1]))
-        
+current = start
 
-print("done")
+while len(path) < len(deliveries) - 1:
+  closest = g.shortest_path_dict_nodes(current, deliveries)
+  total_time += closest[0]
+  path[current] = closest[1][1]
+  current = closest[1][0]
+  deliveries[current] = 1
+
+print(path)
+print(start + ' -> ' + ' -> '.join(path[start].split()))
+for i in path:
+    if i != start:
+        print(i + ' -> ' + ' -> '.join(path[i].split()))
