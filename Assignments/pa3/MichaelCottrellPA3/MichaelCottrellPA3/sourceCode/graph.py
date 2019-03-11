@@ -44,6 +44,7 @@ class Graph:
     #Time Complexity: O(E*Log(E))
     #Space Complexity: O(V) 
     #E = number of edges.
+    #V = number of vertices.
     def compute_shortest_path(self, start):
 
         #Tracks known distances

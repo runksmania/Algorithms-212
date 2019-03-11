@@ -36,6 +36,12 @@ path = {}
 start = ''
 
 #Try each starting point in our list of nodes for delivery min span tree.
+#Time Complexity: O(V^2*E*Log(E))
+#Outer for loop is worst case O(V)
+#Inner while loop is worst case O(V-1)
+#Graph function call is O(E*Log(E))
+#Space Complexity: O(V^2)
+#E = # edges, V = # vertices.
 for i in delivery_data:
 
     #Setup variables to run dijkstra for i as starting node.
