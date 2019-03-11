@@ -91,49 +91,50 @@ class Graph:
                             heappush(to_visit, (float(weight) + top[0], (edge, top[1][1] + " " + edge)))
 
         return distances
-    
-    def compute_minimum_spanning_tree(self, start):
 
-        #our PQ
-        mst_queue = []
+    def shortest_path_dict_nodes(self, start, dict_nodes):
+      
+      if start in self._graph:
+        
+        #Define PQ
+        to_visit = []
 
-        #tracks known paths
-        discoveries = {}
-        discoveries[start] = 1
+        #Tracks previously seen nodes.
+        seen = {}
 
-        #list of accepted edges, will return to caller
-        accepted_edges = []
+        #Push starting location.
+        #Our tuple has a second tuple which stores the edge and its current
+        #path from start.
+        #Which in this case is empty.
+        heappush(to_visit, (0, (start, "")))
 
-        #construct set of starting edges
-        start_vertex = self._graph[start]
+        while len(to_visit) > 0:
 
-        #prime PQ
-        for sink in start_vertex:
+          #Pop top add_vertx.
+          top = heappop(to_visit)
 
-            #recall in Python, heappush sorts based on first element
-            #in tuple
-            heappush(mst_queue, (start_vertex[sink], start, sink))
+          #First item of the inner tuple is our edge name key.
+          key = top[1][0]
 
-        while len(mst_queue) > 0 and len(discoveries) < len(self._graph):
+          if key in dict_nodes and dict_nodes[key] == 0:
+            return top
 
-            #pop off top
-            top = heappop(mst_queue)
-            weight = top[0]
-            source = top[1]
-            sink = top[2]
+          if key not in seen:
 
-            #if not seen:
-            if not sink in discoveries:
+            seen[key] = 0
 
-                #add to discoveries
-                discoveries[sink] = 1
+            #Push children onto heap if not seen before.
+            for edge, weight in self._graph[key].items():
 
-                #record in accepted edges
-                accepted_edges.append(top)
+              if edge not in seen:
 
-                #add outoing edges from sink
-                for vertex in self._graph[sink]:
-                    new_edge_weight = self._graph[sink][vertex]
-                    heappush(mst_queue, (new_edge_weight, sink, vertex))
-
-        return accepted_edges
+                #Push into the heap a tuple containing:
+                #    1.  The weight of this edge + previous path's
+                #    weight.
+                #    2.  A tuple containing:
+                #        I.  The edge name to be our lookup key.
+                #        II.  The path to this edge + this edge
+                #        name.
+                heappush(to_visit, (int(weight) + top[0], (edge, top[1][1] + " " + edge)))
+      
+      return 0
