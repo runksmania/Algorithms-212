@@ -33,7 +33,7 @@ for i in delivery_data:
     
     if closest != 0:
       delivery_time += closest[0]
-      path[current] = closest[1][1]
+      current_path[current] = closest[1][1]
       current = closest[1][0]
       delivery_current[current] = 1
     else:
