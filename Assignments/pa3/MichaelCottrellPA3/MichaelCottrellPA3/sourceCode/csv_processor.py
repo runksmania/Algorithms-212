@@ -1,6 +1,6 @@
 #
-#Assignment: PA2
-#Description: Perform and analyze Dijkstra's shortest path algorithm with the HSU Campus.
+#Assignment: PA3
+#Description: Perform and analyze min span trees with Dijkstra's shortest path algorithm.
 #Author: Michael Cottrell
 #HSU ID: 946839472
 #Completion Time: 5 hours.

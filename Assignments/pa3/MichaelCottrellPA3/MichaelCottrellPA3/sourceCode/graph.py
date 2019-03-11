@@ -1,6 +1,6 @@
 #
-#Assignment: PA2
-#Description: Perform and analyze Dijkstra's shortest path algorithm with the HSU Campus.
+#Assignment: PA3
+#Description: Perform and analyze min span trees with Dijkstra's shortest path algorithm.
 #Author: Michael Cottrell
 #HSU ID: 946839472
 #Completion Time: 5 hours.
@@ -92,6 +92,11 @@ class Graph:
 
         return distances
 
+    #This function finds the shortest path based off of dijkstra's aglorithm.
+    #It also uses a dictionary of nodes to visit.  
+    #It returns a tuple containing the path to the closest node in dict_nodes
+    #Time Complexity: O(E*Log(E))
+    #Space Complexity: O(V)
     def shortest_path_dict_nodes(self, start, dict_nodes):
       
       if start in self._graph:
