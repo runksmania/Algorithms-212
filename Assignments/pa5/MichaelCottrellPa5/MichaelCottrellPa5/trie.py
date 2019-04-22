@@ -19,6 +19,8 @@ class Trie:
       
     current._is_word = True
 
+  #This function is mainly used for debugging the trie.
+  #Prints words found in the Trie.
   def tree_traversal_with_print(self, string, node):
 
     if node._is_word:
@@ -30,6 +32,7 @@ class Trie:
         current_string = string + k
         self.tree_traversal_with_print(current_string, v)
         
+  #Returns a list of words found in the Trie.
   def tree_traversal(self, string, list, node):
 
     if node._is_word:
