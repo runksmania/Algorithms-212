@@ -26,6 +26,7 @@
     </Compile>
     <Compile Include="csv_processor.py" />
     <Compile Include="dictionary.py" />
+    <Compile Include="levenshtein.py" />
     <Compile Include="main.py" />
     <Compile Include="trie.py" />
     <Compile Include="trie_node.py" />
