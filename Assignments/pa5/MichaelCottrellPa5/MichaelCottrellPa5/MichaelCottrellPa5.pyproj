@@ -32,9 +32,11 @@
     <Compile Include="trie_node.py" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="outputFiles\" />
     <Folder Include="resourceFiles\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="resourceFiles\previous_corrections.csv" />
     <Content Include="resourceFiles\sample1.txt" />
     <Content Include="resourceFiles\sample2.txt" />
     <Content Include="resourceFiles\words.txt" />

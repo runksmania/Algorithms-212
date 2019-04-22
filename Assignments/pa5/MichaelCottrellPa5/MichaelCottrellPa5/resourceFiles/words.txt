@@ -206,7 +206,6 @@ move
 like
 night
 live
-r
 point
 believe
 hold
@@ -4650,6 +4649,7 @@ regret
 striking
 likelihood
 carrot
+carrots
 atop
 toll
 rim
