@@ -1,3 +1,5 @@
+from trie_node import Trie_Node
+
 class Trie:
 
   def __init__(self):

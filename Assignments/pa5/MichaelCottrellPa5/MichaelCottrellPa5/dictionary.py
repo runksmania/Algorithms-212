@@ -6,7 +6,7 @@ class Dictionary:
   def __init__(self, file_name):
     self._trie_dict = Trie()
 
-    words = process_csv('words.txt')
+    words = process_csv(file_name)
   
     for i in words:
       self._trie_dict.insert_word(i[0])
@@ -17,7 +17,7 @@ class Dictionary:
       for k,v in self._root._letters.items():
         self._trie_dict.tree_traversal(k, v)
     else:
-      self._trie_dict.tree_traversal(letter, self._trie_dict._letters[letter])
+      self._trie_dict.tree_traversal(letter, self._trie_dict._root._letters[letter])
 
   def print_words_starting_with(self, string):
 
