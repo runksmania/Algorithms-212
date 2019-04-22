@@ -1,9 +1,3 @@
-class Trie_Node:
-
-  def __init__(self):
-    self._letters = {}
-    self._is_word = False
-
 class Trie:
 
   def __init__(self):
@@ -33,12 +27,4 @@ class Trie:
       for k,v in node._letters.items():
         current_string = string + k
         self.tree_traversal(current_string, v)
-
-
-  def print_word_starting_with(self, letter):
-
-    if letter == '':
-      for k,v in self._root._letters.items():
-        self.tree_traversal(k, v)
-    else:
-self.tree_traversal(letter, self._root._letters[letter])
+        
