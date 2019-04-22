@@ -7,7 +7,7 @@ class Trie:
   
   def insert_word(self, word):
 
-    #Create a current pointer 
+    #Create a current pointer
     current = self._root
     for i in word:
       
@@ -19,7 +19,7 @@ class Trie:
       
     current._is_word = True
 
-  def tree_traversal(self, string, node):
+  def tree_traversal_with_print(self, string, node):
 
     if node._is_word:
       print(string)
@@ -28,5 +28,17 @@ class Trie:
 
       for k,v in node._letters.items():
         current_string = string + k
-        self.tree_traversal(current_string, v)
+        self.tree_traversal_with_print(current_string, v)
         
+  def tree_traversal(self, string, list, node):
+
+    if node._is_word:
+      list.append(string)
+
+    if node._letters:
+
+      for k,v in node._letters.items():
+        current_string = string + k
+        list = self.tree_traversal(current_string, list, v)
+
+    return list

@@ -11,14 +11,6 @@ class Dictionary:
     for i in words:
       self._trie_dict.insert_word(i[0])
 
-  def print_words_starting_with_letter(self, letter):
-
-    if letter == '':
-      for k,v in self._root._letters.items():
-        self._trie_dict.tree_traversal(k, v)
-    else:
-      self._trie_dict.tree_traversal(letter, self._trie_dict._root._letters[letter])
-
   def print_words_starting_with(self, string):
 
     current = self._trie_dict._root
@@ -31,9 +23,23 @@ class Dictionary:
         print('none found')
         return
     
-    self._trie_dict.tree_traversal(string, current)
+    self._trie_dict.tree_traversal_with_print(string, current)
 
-  def lookup_word(self, word):
+  def lookup_words_starting_with(self, string):
+
+    current = self._trie_dict._root
+
+    for i in string:
+
+      if i in current._letters:
+        current = current._letters[i]
+      else:
+        print('none found')
+        return
+    
+    return self._trie_dict.tree_traversal(string, [], current)
+
+  def is_word(self, word):
 
     found = False
 

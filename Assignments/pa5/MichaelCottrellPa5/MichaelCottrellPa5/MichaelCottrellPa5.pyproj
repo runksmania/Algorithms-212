@@ -21,6 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="auto_correct.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="csv_processor.py" />
     <Compile Include="dictionary.py" />
     <Compile Include="main.py" />
