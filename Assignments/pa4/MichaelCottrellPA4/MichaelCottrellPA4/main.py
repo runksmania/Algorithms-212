@@ -1,4 +1,15 @@
+#
+#Assignment: PA4
+#Description: Create a decision tree
+#Author: Michael Cottrell
+#HSU ID: 946839472
+#Completion Time: 7 hours.
+#In completing this program, I received help from the following people:
+#N/A
+#
+
 #for CSV parsing
+import sys
 import csv
 from math import log2
 
@@ -198,7 +209,38 @@ def read_tree_from_file(file_name):
 
     return build_tree_from_tree_array(tree_array)
 
+def write_predictions_to_file(header, data_array, tree, file_name):
+    
+    #Add prediction column to output array
+    result_array = []
+    header.append('Prediction')
+    result_array.append(header)
 
+    #Loop through each line.
+    for i in data_array:
+        
+        #Start at root of tree
+        current = tree
+
+        #While children is not empty we need to continue on the tree.
+        while current.children:
+
+            #Check to see if one of the children is in the data.
+            for key in current.children:
+                
+                if key in i:
+                    #If the children is in the data traverse the tree.
+                    current = current.children[key]
+                    break
+
+        #Append the tree's outcome and then append the whole line to the output array.
+        i.append(current.value)
+        result_array.append(i)
+
+    with open(file_name, 'w') as some_file:
+        
+        for i in result_array:
+            print(','.join(i), file=some_file)
 
 def main():
    
@@ -218,11 +260,10 @@ def main():
    if option == '1':
        file_name = input('Note the file must be in the resourceFiles directory.\nPlease enter a filename: ')
        outcome_column = int(input('Please enter the output column number: '))
-       #result = process_csv("resourceFiles/" + file_name)
-       result = process_csv("resourceFiles/easy data set.csv")
+       result = process_csv("resourceFiles/" + file_name)
        header = result[0]
        result = result[1:]
-       root = build_tree(result, header, 4)
+       root = build_tree(result, header, outcome_column)
    else:
         file_name = input('Note the file must be in the resourceFiles directory.\nPlease enter a filename: ')
         root = read_tree_from_file(file_name)
@@ -232,7 +273,7 @@ def main():
    while not (option == '1' or option == '2' or option == '3'):
        print('\n\nPlease enter the number for one of the following options:\n' 
                + '1. Write decision tree to file\n' 
-               + '2. Write data to file with prediction'
+               + '2. Write data to file with prediction\n'
                + '3. Exit.'
                )
        option = input('Enter a choice: ')
@@ -245,7 +286,7 @@ def main():
        tree_array = tree_to_array(root, [])
        write_tree_to_file(tree_array, file_name)
    elif option == '2':
-       print('awesome')
+       write_predictions_to_file(header, result,  root, file_name)
 
 
    print("done")

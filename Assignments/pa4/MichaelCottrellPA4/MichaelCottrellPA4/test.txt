@@ -1,8 +1,538 @@
-NULL|Outlook|3
-Sunny|Humidity|2
-Overcast|Yes|0
-Rain|Wind|2
-High|No|0
-Normal|Yes|0
-Weak|Yes|0
-Strong|No|0
+NULL|debt to income|51
+3|state|10
+22|state|15
+30|state|11
+26|state|12
+20|state|20
+19|earliest credit|20
+6|state|13
+38|C|0
+28|state|10
+18|earliest credit|19
+21|state|16
+1|emp_length|4
+34|emp_length|7
+14|state|15
+16|state|14
+27|earliest credit|8
+15|earliest credit|19
+7|emp_length|7
+33|C|0
+11|emp_length|10
+12|state|16
+23|earliest credit|14
+17|state|18
+24|earliest credit|15
+10|earliest credit|10
+43|C|0
+4|emp_length|4
+29|state|17
+9|state|10
+49|C|0
+8|earliest credit|9
+13|state|10
+32|C|0
+31|C|0
+25|earliest credit|19
+44|A|0
+2|emp_length|3
+135|C|0
+92|C|0
+35|income|2
+52|C|0
+78|C|0
+5|home_ownership|3
+54|C|0
+41|C|0
+39|C|0
+0|C|0
+40|C|0
+68|C|0
+82|C|0
+42|C|0
+OH|C|0
+CO|C|0
+CA|A|0
+TX|A|0
+NY|C|0
+MA|C|0
+AZ|C|0
+VA|C|0
+LA|A|0
+GA|C|0
+AZ|C|0
+FL|C|0
+NY|C|0
+IL|C|0
+VA|C|0
+NM|C|0
+DE|C|0
+MS|C|0
+WI|C|0
+CA|C|0
+OH|A|0
+NH|C|0
+MD|C|0
+NV|C|0
+MA|A|0
+OR|C|0
+MI|C|0
+MO|C|0
+CA|C|0
+FL|C|0
+IN|C|0
+TX|A|0
+NJ|C|0
+NH|C|0
+VA|C|0
+WI|C|0
+OH|A|0
+CA|C|0
+AZ|A|0
+CT|C|0
+TX|C|0
+NM|C|0
+PA|C|0
+FL|C|0
+NJ|C|0
+TN|A|0
+MN|C|0
+AK|A|0
+MO|C|0
+ME|C|0
+OH|C|0
+MI|A|0
+MA|C|0
+NY|emp_length|3
+AR|C|0
+CO|A|0
+NV|C|0
+KY|C|0
+CA|C|0
+NE|C|0
+FL|A|0
+TX|C|0
+MN|C|0
+IN|C|0
+GA|C|0
+WA|A|0
+NC|A|0
+NJ|C|0
+10+ years|C|0
+n/a|A|0
+< 1 year|A|0
+2009|C|0
+1988|emp_length|2
+2004|state|3
+2000|emp_length|2
+1989|A|0
+1976|C|0
+2003|emp_length|2
+2008|C|0
+2010|C|0
+1998|A|0
+1993|C|0
+2002|C|0
+1995|A|0
+1992|A|0
+2012|A|0
+2001|C|0
+1984|A|0
+1978|C|0
+2007|C|0
+2006|C|0
+3 years|C|0
+10+ years|A|0
+IN|A|0
+MO|C|0
+CO|A|0
+10+ years|A|0
+5 years|C|0
+2 years|C|0
+1 year|A|0
+MD|C|0
+CT|C|0
+TX|emp_length|2
+NY|income|5
+MA|A|0
+CA|A|0
+CO|C|0
+IN|C|0
+OR|C|0
+NC|A|0
+WI|C|0
+IL|C|0
+NJ|C|0
+1 year|A|0
+2 years|C|0
+80000|A|0
+125000|C|0
+100000|C|0
+15000|A|0
+60000|C|0
+FL|home_ownership|2
+CA|C|0
+PA|A|0
+TN|C|0
+MD|C|0
+VA|C|0
+NY|A|0
+TX|C|0
+NV|A|0
+AR|C|0
+MORTGAGE|C|0
+OWN|A|0
+1998|C|0
+2003|A|0
+2009|C|0
+2005|state|6
+2000|A|0
+2001|C|0
+2006|C|0
+2008|C|0
+2007|C|0
+2012|C|0
+2013|C|0
+2002|emp_length|2
+2010|C|0
+1984|A|0
+1995|A|0
+1994|C|0
+2004|emp_length|2
+1999|C|0
+1997|C|0
+CA|C|0
+AL|C|0
+PA|A|0
+NY|C|0
+NV|A|0
+VT|C|0
+5 years|A|0
+10+ years|C|0
+10+ years|A|0
+< 1 year|C|0
+NC|emp_length|2
+CA|income|2
+NY|C|0
+TX|C|0
+NH|C|0
+IN|emp_length|2
+GA|A|0
+MN|C|0
+AK|C|0
+WA|A|0
+NV|A|0
+MO|C|0
+UT|A|0
+AZ|C|0
+VA|C|0
+OK|A|0
+10+ years|C|0
+8 years|A|0
+80000|A|0
+40000|C|0
+< 1 year|C|0
+6 years|A|0
+10+ years|A|0
+7 years|A|0
+3 years|C|0
+2 years|C|0
+1 year|C|0
+9 years|C|0
+2 years|C|0
+n/a|C|0
+6 years|A|0
+5 years|C|0
+< 1 year|A|0
+MA|C|0
+IL|C|0
+OR|C|0
+DC|C|0
+TX|A|0
+MD|C|0
+FL|emp_length|3
+PA|emp_length|2
+NY|income|3
+NC|C|0
+CA|A|0
+NJ|C|0
+WA|emp_length|2
+CT|A|0
+VA|C|0
+2 years|C|0
+3 years|A|0
+10+ years|C|0
+< 1 year|C|0
+8 years|A|0
+40000|A|0
+100000|A|0
+60000|C|0
+10+ years|A|0
+9 years|C|0
+OH|A|0
+NV|C|0
+CA|C|0
+NC|C|0
+AL|A|0
+VA|C|0
+MA|emp_length|2
+TX|A|0
+CO|A|0
+MI|C|0
+WI|C|0
+FL|C|0
+IL|C|0
+NY|C|0
+10+ years|A|0
+2 years|C|0
+2002|emp_length|2
+1987|C|0
+2007|C|0
+2004|C|0
+1990|A|0
+2005|C|0
+1989|A|0
+2001|C|0
+1 year|C|0
+10+ years|A|0
+1983|A|0
+1988|A|0
+2000|C|0
+2003|emp_length|3
+1981|A|0
+1980|A|0
+2002|income|3
+2012|C|0
+2001|C|0
+2008|C|0
+2010|A|0
+2006|C|0
+2005|A|0
+1996|A|0
+1990|A|0
+2007|A|0
+1998|A|0
+1997|income|3
+1999|C|0
+10+ years|C|0
+1 year|C|0
+4 years|A|0
+30000|C|0
+80000|A|0
+60000|C|0
+100000|C|0
+150000|A|0
+125000|C|0
+10+ years|A|0
+2 years|C|0
+7 years|income|2
+n/a|A|0
+1 year|C|0
+5 years|A|0
+< 1 year|A|0
+60000|C|0
+150000|A|0
+2 years|C|0
+10+ years|state|6
+4 years|C|0
+n/a|C|0
+6 years|C|0
+3 years|income|3
+8 years|A|0
+< 1 year|C|0
+1 year|C|0
+7 years|A|0
+FL|C|0
+NM|A|0
+NC|C|0
+NJ|A|0
+PA|A|0
+TX|C|0
+80000|C|0
+100000|A|0
+60000|A|0
+NY|income|3
+FL|C|0
+UT|C|0
+MA|A|0
+CA|income|3
+OH|A|0
+WA|C|0
+AZ|A|0
+TN|A|0
+PA|emp_length|3
+RI|C|0
+GA|emp_length|2
+AK|C|0
+IL|C|0
+AL|C|0
+MD|C|0
+150000|A|0
+40000|C|0
+60000|C|0
+150000|A|0
+60000|C|0
+40000|A|0
+10+ years|A|0
+< 1 year|C|0
+1 year|A|0
+n/a|A|0
+3 years|C|0
+1998|A|0
+1988|C|0
+1992|C|0
+2000|C|0
+1996|A|0
+1976|C|0
+2014|C|0
+1995|C|0
+1991|A|0
+2003|C|0
+2008|C|0
+1997|A|0
+2001|A|0
+1999|C|0
+WI|C|0
+CA|emp_length|2
+FL|emp_length|3
+TX|C|0
+IL|C|0
+NC|A|0
+TN|A|0
+WA|C|0
+MA|C|0
+PA|A|0
+AZ|C|0
+OH|C|0
+NY|A|0
+CT|C|0
+OK|A|0
+GA|A|0
+IN|A|0
+MI|C|0
+6 years|C|0
+10+ years|A|0
+3 years|C|0
+1 year|C|0
+10+ years|A|0
+1983|A|0
+1984|A|0
+2014|C|0
+1993|C|0
+2004|C|0
+2005|C|0
+2007|C|0
+2002|emp_length|2
+2003|A|0
+1994|C|0
+1997|C|0
+1996|C|0
+1999|C|0
+2000|A|0
+1992|A|0
+8 years|A|0
+10+ years|C|0
+1999|C|0
+2009|A|0
+1981|C|0
+1980|A|0
+2006|C|0
+1978|C|0
+1989|A|0
+2013|C|0
+1995|C|0
+2008|emp_length|2
+5 years|C|0
+2 years|A|0
+3 years|A|0
+5 years|C|0
+2 years|C|0
+10+ years|A|0
+CT|A|0
+IN|C|0
+FL|C|0
+TX|C|0
+CA|C|0
+AL|emp_length|2
+TN|C|0
+VA|emp_length|3
+ND|A|0
+IL|A|0
+NJ|C|0
+LA|C|0
+WY|C|0
+MA|A|0
+AZ|C|0
+NC|A|0
+SC|C|0
+10+ years|A|0
+8 years|C|0
+9 years|C|0
+5 years|A|0
+< 1 year|C|0
+CA|emp_length|2
+PA|C|0
+NY|A|0
+TX|C|0
+NJ|C|0
+FL|C|0
+GA|A|0
+OH|A|0
+MA|C|0
+MS|C|0
+< 1 year|C|0
+10+ years|A|0
+2012|C|0
+1997|A|0
+2005|C|0
+2004|C|0
+2001|A|0
+1992|C|0
+2003|C|0
+2007|A|0
+1998|A|0
+WI|C|0
+GA|A|0
+CA|C|0
+FL|C|0
+MA|emp_length|2
+TX|C|0
+OK|A|0
+NY|C|0
+NV|A|0
+OH|C|0
+< 1 year|A|0
+5 years|C|0
+2004|emp_length|4
+2006|C|0
+2002|C|0
+1987|A|0
+1997|C|0
+1996|C|0
+1994|C|0
+2003|C|0
+1988|C|0
+1984|A|0
+2001|C|0
+1995|C|0
+1986|C|0
+1992|A|0
+1990|C|0
+2000|emp_length|2
+1998|C|0
+2005|C|0
+1999|C|0
+< 1 year|C|0
+8 years|C|0
+4 years|A|0
+10+ years|C|0
+10+ years|C|0
+1 year|A|0
+1 year|C|0
+10+ years|A|0
+9 years|A|0
+80000|C|0
+60000|A|0
+MORTGAGE|A|0
+RENT|C|0
+OWN|C|0
