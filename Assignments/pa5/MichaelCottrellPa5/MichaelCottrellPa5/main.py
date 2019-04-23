@@ -1,8 +1,22 @@
+#
+#Assignment: PA5
+#Description: Show use of levenshtein edit distance in a spell checker.
+#Author: Michael Cottrell
+#HSU ID: 946839472
+#Completion Time: 6 hours.
+#In completing this program, I received help from the following people:
+#N/A
+#
+
 from heapq import heappop
 from dictionary import Dictionary
 from auto_correct import find_possible_matches
 from csv_processor import process_csv
 
+#Time Complexity: O(N)
+#Space Complexity: O(1)
+#N is size of possible_matches
+#This function formats the printing for the unkown word and possible corrections.
 def print_corrections(word, context, possible_matches):
 
   print('Uknown word: ' + word)
