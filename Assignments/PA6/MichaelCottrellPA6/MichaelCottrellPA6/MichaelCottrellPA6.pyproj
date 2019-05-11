@@ -24,6 +24,12 @@
     <Compile Include="hamming.py" />
     <Compile Include="main.py" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="sample.txt" />
+    <Content Include="sample.txt.coded" />
+    <Content Include="sample_garbled.decoded.txt" />
+    <Content Include="sample_garbled.txt.coded" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
        Visual Studio and specify your pre- and post-build commands in

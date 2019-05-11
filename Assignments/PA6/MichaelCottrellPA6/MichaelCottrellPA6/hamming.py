@@ -41,11 +41,11 @@ def decode(bits_to_decode):
     return [sum(i) % 2 for i in matrix]
 
 #Function to check if the bits are correct or have been corrupted.
-#Returns a 0 if the bits are not corrupted, and returns the error bit for a list indexed by 0 if corrupted.
+#Returns a -1 if the bits are not corrupted, and returns the error bit for a list indexed by 0 if corrupted.
 def parity_check(bits_decoded):
 
     if sum(bits_decoded) == 0:
-        return 0
+        return -1
 
     else:
         wrong_bit = 0
