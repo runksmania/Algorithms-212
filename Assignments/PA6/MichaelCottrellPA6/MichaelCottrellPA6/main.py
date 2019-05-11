@@ -1,58 +1,80 @@
 from hamming import *
 import struct
 
-
 correct_corrupted = True
-file = open('sample.txt.coded', 'rb').read()
-x = struct.unpack("i" * ((len(file) -24) // 4), file[20:-4])
+array_of_bytes = []
 
-bin_string = []
-seven_bit_strings = []
+with open('sample.txt.coded', 'rb') as file:
 
-for i in x:
-    bin_string.append("{0:b}".format(i))
+    #Read first btye
+    byte = file.read(1)
 
-for i in bin_string:
-    lower = 0
+    while byte != b'':
+        #While btyes read are not empty.
 
-    for j in range(1, len(i)):
+        #Convert byte into binary string without 0b, and insert 1's and 0's into list.
+        byte_string = bin(ord(byte))[2:]
+        byte_array = [int(i) for i in byte_string]
 
-        if j % 7 == 0:
-            temp_list = [int(x) for x in i[lower:j]]
+        #If the size of the binary string was less than 7 we need to add 0's to the front.
+        #This is due to python removing 0's in front of a binary number.
+        if len(byte_array) < 7:
+            byte_array = list(reversed(byte_array))
 
-            if len(temp_list) < 7:
-                temp_list = reversed(temp_list)
+            while len(byte_array) < 7:
+                byte_array.append(0)
+
+            byte_array = list(reversed(byte_array))
+
+        parity = parity_check(decode(byte_array))
+
+        if correct_corrupted:
+            if parity != -1:
                 
-                while len(temp_list) < 7:
-                    temp_list.append(0)
+                #If user wants bits corrected, and a bit is corrupted fix it.
+                byte_array[parity] = 1 - byte_array[parity]
 
-                temp_list = reversed(temp_list)
-            parity_result = -1
+        #Append the byte array and its parity potentially after fixing to the array of bytes.
+        #Appending parity here is not necessary but is done for debugging purposes.
+        array_of_bytes.append((byte_array, parity_check(decode(byte_array))))
 
-            if correct_corrupted:
-               parity_result = parity_check(decode(temp_list))
-                    
-            if parity_result != -1:
-                temp_list[parity_result] = 1 - temp_list[parity_result]
+        #Read next byte
+        byte = file.read(1)
 
-            seven_bit_strings.append((temp_list, parity_check(decode(temp_list))))
-            lower = j
+#binary_chars is used for debugging purposes.
+binary_chars = []
+chars = []
 
-data = []
+for i in range(len(array_of_bytes) - 1):
+    combined_bytes = []
 
-for i in range(len(seven_bit_strings) - 1):
-    string = seven_bit_strings[i][0]
-    string2 = seven_bit_strings[i + 1][0]
+    #Each byte only contains 4 of the 8 bits for an ascii character. 
+    #So we need to grab 2 at a time.
+    data_1 = array_of_bytes[i][0]
+    data_2 = array_of_bytes[i + 1][0]
 
-    temp_data = []
+    #Append the data bits from first byte.
+    combined_bytes.append(str(data_1[2]))
+    
+    for j in range(4, 7):
+        combined_bytes.append(str(data_1[j]))
 
-    temp_data.append(str(string[2]))
-    temp_data.append(''.join([str(i) for i in string[4:]]))
-    temp_data.append(str(string2[2]))
-    temp_data.append(''.join([str(i) for i in string2[4:]]))
+    #Append data bits from second byte.
+    combined_bytes.append(str(data_2[2]))
+    
+    for j in range(4, 7):
+        combined_bytes.append(str(data_2[j]))
 
-    data.append(''.join(temp_data))
+    #Join combined_bytes with 0b so python can properly convert to an int and then a character.
+    #Binary_chars is appending binary string for debugging purposes.
+    binary_chars.append('0b' + ''.join(combined_bytes))
+    chars.append(chr(int('0b' + ''.join(combined_bytes), 2)))
 
-chars = [chr(int(i, 2)) for i in data]
+for i in range(len(chars)):
+    
+    if i % 2 == 0:
+        
+        #For some reason the characters we want are actually every other character.
+        print(chr(int(binary_chars[i], 2)), end='')
 
-print('done')
+print('\n')
