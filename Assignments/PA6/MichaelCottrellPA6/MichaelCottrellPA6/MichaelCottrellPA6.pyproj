@@ -11,6 +11,11 @@
     <OutputPath>.</OutputPath>
     <Name>MichaelCottrellPA6</Name>
     <RootNamespace>MichaelCottrellPA6</RootNamespace>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterArguments>
+    </InterpreterArguments>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
+    <CommandLineArguments>decode simple.txt.coded</CommandLineArguments>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>

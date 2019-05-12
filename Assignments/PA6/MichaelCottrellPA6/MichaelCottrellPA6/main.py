@@ -6,7 +6,12 @@ def encodeFile(file_name):
    encode_data_to_file(file_name)
 
 def decodeFile(file_name):
-   decode_data_from_file(file_name)
+   decoded_data = decode_data_from_file(file_name)
+   file_name = file_name.split('.')
+   file_name = file_name[0] + '.decoded.txt'
+
+   with open(file_name, 'w') as some_file:
+       print(''.join(decoded_data), end='', file=some_file)
 
 def main():
    if len(sys.argv) != 3:
