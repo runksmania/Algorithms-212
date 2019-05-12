@@ -85,7 +85,13 @@ def encode_data_to_file(file_name):
 
       char = some_file.read(1)
 
-  print(file_data_half_bytes)
+  #print(file_data_half_bytes)
+  encoded_data = []
+
+  for i in file_data_half_bytes:
+      encoded_data.append('0b0' + ''.join([str(j) for j in encode(i)]))
+
+  print(encoded_data)
 
   return 0
     
