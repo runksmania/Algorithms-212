@@ -57,8 +57,37 @@ def parity_check(bits_decoded):
         return wrong_bit - 1   
 
 def encode_data_to_file(file_name):    
+  file_data_half_bytes = []
 
-    return 0
+  with open(file_name, 'r') as some_file:
+    char = some_file.read(1)
+
+    while char != '':
+      
+      if char != '\n' and char != '\r':
+        #Get binary string skipping 0b part of string.
+        byte = bin(ord(char))[2:]
+
+        #Add 0's to the front of the binary string if less than 8 bits long.
+        byte = '0' * (8 - len(byte)) + byte
+
+        byte_half_1 = [int(i) for i in byte[:4]]
+        byte_half_2 = [int(i) for i in byte[4:]]
+        
+        file_data_half_bytes.append(byte_half_1)
+        file_data_half_bytes.append(byte_half_2)
+      
+      else:
+        
+        if char == '\n':
+          file_data_half_bytes.append('\n')
+          file_data_half_bytes.append([0,0,0,0])
+
+      char = some_file.read(1)
+
+  print(file_data_half_bytes)
+
+  return 0
     
 #Function to decode a hamming encoded binary file.
 #Returns a list of characters which is the decoded file.
