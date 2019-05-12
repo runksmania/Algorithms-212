@@ -1,9 +1,11 @@
-encoding_matrix = [[1,0,0,0,1,1,0],
-    [0,1,0,0,1,0,1],
-    [0,0,1,0,0,1,1],
-    [0,0,0,1,1,1,1]]
+encoding_matrix = [
+    [1,1,1,0,0,0,0],
+    [1,0,0,1,1,0,0],
+    [0,1,0,1,0,1,0],
+    [1,1,0,1,0,0,1]]
 
-decoding_matrix = [[1,0,1,0,1,0,1],
+decoding_matrix = [
+    [1,0,1,0,1,0,1],
     [0,1,1,0,0,1,1],
     [0,0,0,1,1,1,1]]
 
@@ -81,15 +83,22 @@ def encode_data_from_file(file_name):
         
         if char == '\n':
           file_data_half_bytes.append('\n')
-          file_data_half_bytes.append([0,0,0,0])
 
       char = some_file.read(1)
 
-  encoded_data = []
+  encoded_data = bytearray()
 
   for i in file_data_half_bytes:
-      encoded_data.append('0b0' + ''.join([str(j) for j in encode(i)]))
 
+      if i != '\n':
+          encoded = encode(i)
+          binary_string = '0b0' + ''.join([str(j) for j in encoded])
+          encoded_data.append(int(binary_string, 2))
+      
+      else:
+          encoded_data.append(ord(i))
+          encoded_data.append(ord('\r'))
+        
   return encoded_data
     
 #Function to decode a hamming encoded binary file.
@@ -102,7 +111,7 @@ def decode_data_from_file(file_name):
     correct_corrupted = False
 
 
-    with open('sample.txt.coded', 'rb') as file:
+    with open(file_name, 'rb') as file:
 
         #Read first btye
         byte = file.read(1)
@@ -133,8 +142,10 @@ def decode_data_from_file(file_name):
                 if parity != -1:
 
                     if not asked_for_corrections:
-                        user_input = input('Do you want to correct potential corrupted bits?\nEnter (Y)es or (N)o.\n'
-                         + '**Warning correction corrupted bits may still result in incorrect data.**')
+                        user_input = input('Do you want to correct potential corrupted bits?\n'
+                         + '**Warning correction corrupted bits may still result in incorrect data.**\nEnter (Y)es or (N)o: ')
+                        asked_for_corrections = True
+                        print()
 
                         if user_input.lower() == 'y':
                             correct_corrupted = True
@@ -161,7 +172,7 @@ def decode_data_from_file(file_name):
 
     for i in range(0, len(array_of_bytes) - 1, 2):
     
-        if array_of_bytes[i] != '\n':
+        if array_of_bytes[i] != '\n' and array_of_bytes[i + 1] != '\n':
             combined_bytes = []
 
             #Each byte only contains 4 of the 8 bits for an ascii character.
@@ -187,8 +198,10 @@ def decode_data_from_file(file_name):
             chars.append(chr(int('0b' + ''.join(combined_bytes), 2)))
     
         else:
-        
-            chars.append(array_of_bytes[i])
-            chars.append(array_of_bytes[i + 1])
+
+            for j in range(i, i + 2):
+                
+                if type(array_of_bytes[j]) == type('\n'):
+                    chars.append(array_of_bytes[i])
 
     return chars
