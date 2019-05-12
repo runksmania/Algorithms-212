@@ -62,10 +62,12 @@ def encode_data_to_file(file_name):
     
 #Function to decode a hamming encoded binary file.
 #Returns a list of characters which is the decoded file.
-def decode_data_from_file(file_name, correct_corrupted=False):
+def decode_data_from_file(file_name):
 
     array_of_bytes = []
     bytes = []
+    asked_for_corrections = False
+    correct_corrupted = False
 
 
     with open('sample.txt.coded', 'rb') as file:
@@ -79,14 +81,11 @@ def decode_data_from_file(file_name, correct_corrupted=False):
 
                 bytes.append((byte, bin(ord(byte))))
 
-                #Convert byte into binary string without 0b, and insert 1's and 0's
-                #into list.
+                #Convert byte into binary string without 0b, and insert 1's and 0's into list.
                 byte_string = bin(ord(byte))[2:]
                 byte_array = [int(i) for i in byte_string]
 
-                #If the size of the binary string was less than 7 we need to add
-                #0's to
-                #the front.
+                #If the size of the binary string was less than 7 we need to add 0's to the front.
                 #This is due to python removing 0's in front of a binary number.
                 if len(byte_array) < 7:
                     byte_array = list(reversed(byte_array))
@@ -98,18 +97,22 @@ def decode_data_from_file(file_name, correct_corrupted=False):
 
                 parity = parity_check(decode(byte_array))
 
-                if correct_corrupted:
-                    if parity != -1:
+                #If parity is not -1 a bit has been corrupted.
+                if parity != -1:
+
+                    if not asked_for_corrections:
+                        user_input = input('Do you want to correct potential corrupted bits?\nEnter (Y)es or (N)o.\n'
+                         + '**Warning correction corrupted bits may still result in incorrect data.**')
+
+                        if user_input.lower() == 'y':
+                            correct_corrupted = True
                 
-                        #If user wants bits corrected, and a bit is corrupted fix
-                        #it.
+                    #If user wants bits corrected, and a bit is corrupted fix it.
+                    if correct_corrupted:
                         byte_array[parity] = 1 - byte_array[parity]
 
-                #Append the byte array and its parity potentially after fixing to
-                #the
-                #array of bytes.
-                #Appending parity here is not necessary but is done for debugging
-                #purposes.
+                #Append the byte array and its parity potentially after fixing to the array of bytes.
+                #Appending parity here is not necessary but is done for debugging purposes.
                 array_of_bytes.append((byte_array, parity_check(decode(byte_array))))
 
             else:
@@ -146,9 +149,7 @@ def decode_data_from_file(file_name, correct_corrupted=False):
             for j in range(4, 7):
                 combined_bytes.append(str(data_2[j]))
 
-            #Join combined_bytes with 0b so python can properly convert to an int
-            #and
-            #then a character.
+            #Join combined_bytes with 0b so python can properly convert to an int and then a character.
             #Binary_chars is appending binary string for debugging purposes.
             binary_chars.append('0b' + ''.join(combined_bytes))
             chars.append(chr(int('0b' + ''.join(combined_bytes), 2)))
