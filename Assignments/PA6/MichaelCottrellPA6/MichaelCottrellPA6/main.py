@@ -12,9 +12,14 @@ def decodeFile(file_name):
    decoded_data = decode_data_from_file(file_name)
    file_name = file_name.split('.')
    file_name = file_name[0] + '.decoded.txt'
+   decoded_copy = []
+
+   for i in decoded_data:
+       if type(i) != type(()):
+           decoded_copy.append(i)
 
    with open(file_name, 'w') as some_file:
-       print(''.join(decoded_data), end='', file=some_file)
+       print(''.join(decoded_copy), end='', file=some_file)
 
 def main():
    if len(sys.argv) != 3:

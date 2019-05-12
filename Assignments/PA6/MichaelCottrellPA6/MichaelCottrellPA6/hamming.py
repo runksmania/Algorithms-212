@@ -171,7 +171,7 @@ def decode_data_from_file(file_name):
     chars = []
 
     for i in range(0, len(array_of_bytes) - 1, 2):
-    
+
         if array_of_bytes[i] != '\n' and array_of_bytes[i + 1] != '\n':
             combined_bytes = []
 
