@@ -1,11 +1,9 @@
-encoding_matrix = [
-    [1,0,0,0,1,1,0],
+encoding_matrix = [[1,0,0,0,1,1,0],
     [0,1,0,0,1,0,1],
     [0,0,1,0,0,1,1],
     [0,0,0,1,1,1,1]]
 
-decoding_matrix = [
-    [1,0,1,0,1,0,1],
+decoding_matrix = [[1,0,1,0,1,0,1],
     [0,1,1,0,0,1,1],
     [0,0,0,1,1,1,1]]
 
@@ -26,7 +24,8 @@ def encode(bits_to_encode):
 
 #Function to decode a list of bits encoded by a hamming algorithm.
 #Performs matrix multiplication on bits_to_decode and the decoding_matrix
-#Returns a list of bits that can indicated corrupted bit or if no corruptions found.
+#Returns a list of bits that can indicated corrupted bit or if no corruptions
+#found.
 def decode(bits_to_decode):
 
     matrix = [[] for i in range(len(decoding_matrix))]
@@ -41,7 +40,8 @@ def decode(bits_to_decode):
     return [sum(i) % 2 for i in matrix]
 
 #Function to check if the bits are correct or have been corrupted.
-#Returns a -1 if the bits are not corrupted, and returns the error bit for a list indexed by 0 if corrupted.
+#Returns a -1 if the bits are not corrupted, and returns the error bit for a
+#list indexed by 0 if corrupted.
 def parity_check(bits_decoded):
 
     if sum(bits_decoded) == 0:
@@ -55,4 +55,107 @@ def parity_check(bits_decoded):
                 wrong_bit += pow(2, i)
         
         return wrong_bit - 1   
+
+def encode_data_to_file(file_name):    
+
+    return 0
     
+#Function to decode a hamming encoded binary file.
+#Returns a list of characters which is the decoded file.
+def decode_data_from_file(file_name, correct_corrupted=False):
+
+    array_of_bytes = []
+    bytes = []
+
+
+    with open('sample.txt.coded', 'rb') as file:
+
+        #Read first btye
+        byte = file.read(1)
+
+        while byte != b'':
+            #While btyes read are not empty.
+            if byte != b'\r' and byte != b'\n':
+
+                bytes.append((byte, bin(ord(byte))))
+
+                #Convert byte into binary string without 0b, and insert 1's and 0's
+                #into list.
+                byte_string = bin(ord(byte))[2:]
+                byte_array = [int(i) for i in byte_string]
+
+                #If the size of the binary string was less than 7 we need to add
+                #0's to
+                #the front.
+                #This is due to python removing 0's in front of a binary number.
+                if len(byte_array) < 7:
+                    byte_array = list(reversed(byte_array))
+
+                    while len(byte_array) < 7:
+                        byte_array.append(0)
+
+                    byte_array = list(reversed(byte_array))
+
+                parity = parity_check(decode(byte_array))
+
+                if correct_corrupted:
+                    if parity != -1:
+                
+                        #If user wants bits corrected, and a bit is corrupted fix
+                        #it.
+                        byte_array[parity] = 1 - byte_array[parity]
+
+                #Append the byte array and its parity potentially after fixing to
+                #the
+                #array of bytes.
+                #Appending parity here is not necessary but is done for debugging
+                #purposes.
+                array_of_bytes.append((byte_array, parity_check(decode(byte_array))))
+
+            else:
+            
+                if byte == b'\n':
+                    array_of_bytes.append('\n')
+
+            #Read next byte
+            byte = file.read(1)
+
+    #binary_chars is used for debugging purposes.
+    binary_chars = []
+    chars = []
+
+    for i in range(0, len(array_of_bytes) - 1, 2):
+    
+        if array_of_bytes[i] != '\n':
+            combined_bytes = []
+
+            #Each byte only contains 4 of the 8 bits for an ascii character.
+            #So we need to grab 2 at a time.
+            data_1 = array_of_bytes[i][0]
+            data_2 = array_of_bytes[i + 1][0]
+
+            #Append the data bits from first byte.
+            combined_bytes.append(str(data_1[2]))
+    
+            for j in range(4, 7):
+                combined_bytes.append(str(data_1[j]))
+
+            #Append data bits from second byte.
+            combined_bytes.append(str(data_2[2]))
+    
+            for j in range(4, 7):
+                combined_bytes.append(str(data_2[j]))
+
+            #Join combined_bytes with 0b so python can properly convert to an int
+            #and
+            #then a character.
+            #Binary_chars is appending binary string for debugging purposes.
+            binary_chars.append('0b' + ''.join(combined_bytes))
+            chars.append(chr(int('0b' + ''.join(combined_bytes), 2)))
+    
+        else:
+        
+            chars.append(array_of_bytes[i])
+            chars.append(array_of_bytes[i + 1])
+
+    return chars
