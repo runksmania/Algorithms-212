@@ -1,9 +1,14 @@
 import sys
 from hamming import decode_data_from_file
-from hamming import encode_data_to_file
+from hamming import encode_data_from_file
 
 def encodeFile(file_name):
-   encode_data_to_file(file_name)
+   encoded_data = encode_data_from_file(file_name)
+
+   
+   #with open(file_name + '.coded', 'wb') as some_file:
+   x = [chr(int(i, 2)) for i in encoded_data]
+   a = 0
 
 def decodeFile(file_name):
    decoded_data = decode_data_from_file(file_name)

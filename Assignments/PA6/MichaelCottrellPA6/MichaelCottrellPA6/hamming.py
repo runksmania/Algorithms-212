@@ -56,7 +56,7 @@ def parity_check(bits_decoded):
         
         return wrong_bit - 1   
 
-def encode_data_to_file(file_name):    
+def encode_data_from_file(file_name):    
   file_data_half_bytes = []
 
   with open(file_name, 'r') as some_file:
@@ -85,15 +85,12 @@ def encode_data_to_file(file_name):
 
       char = some_file.read(1)
 
-  #print(file_data_half_bytes)
   encoded_data = []
 
   for i in file_data_half_bytes:
       encoded_data.append('0b0' + ''.join([str(j) for j in encode(i)]))
 
-  print(encoded_data)
-
-  return 0
+  return encoded_data
     
 #Function to decode a hamming encoded binary file.
 #Returns a list of characters which is the decoded file.
