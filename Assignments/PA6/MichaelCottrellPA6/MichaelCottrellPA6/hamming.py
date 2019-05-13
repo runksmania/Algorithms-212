@@ -1,3 +1,13 @@
+#
+#Assignment: PA6
+#Description: Use hamming algorithm (7,4) to encode and decode a data file.
+#Author: Michael Cottrell
+#HSU ID: 946839472
+#Completion Time: 12 hours.
+#In completing this program, I received help from the following people:
+#Adam Carter
+#
+
 encoding_matrix = [
     [1,1,1,0,0,0,0],
     [1,0,0,1,1,0,0],
