@@ -15,7 +15,7 @@
     <InterpreterArguments>
     </InterpreterArguments>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
-    <CommandLineArguments>decode test.txt.coded</CommandLineArguments>
+    <CommandLineArguments>decode sample.txt.coded</CommandLineArguments>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,7 +31,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="sample.txt" />
+    <Content Include="sample.txt.coded" />
     <Content Include="test.txt.coded" />
+    <Content Include="test.txt.codedd" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

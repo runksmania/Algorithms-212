@@ -73,14 +73,17 @@ def encode_data_from_file(file_name):
         #Add 0's to the front of the binary string if less than 8 bits long.
         byte = '0' * (8 - len(byte)) + byte
 
-        byte_half_1 = [int(i) for i in byte[:4]]
-        byte_half_2 = [int(i) for i in byte[4:]]
+        #Split the byte into low and high bits.
+        #Then append them into file_data_half_bytes.
+        high_bits = [int(i) for i in byte[:4]]
+        low_bits = [int(i) for i in byte[4:]]
         
-        file_data_half_bytes.append(byte_half_1)
-        file_data_half_bytes.append(byte_half_2)
+        file_data_half_bytes.append(high_bits)
+        file_data_half_bytes.append(low_bits)
       
       else:
         
+        #Don't encode newline characters.
         if char == '\n':
           file_data_half_bytes.append('\n')
 
@@ -91,6 +94,8 @@ def encode_data_from_file(file_name):
   for i in file_data_half_bytes:
 
       if i != '\n':
+
+          #Encode each half_byte and convert that into an integer to put into the bytearray.
           encoded = encode(i)
           binary_string = '0b0' + ''.join([str(j) for j in encoded])
           encoded_data.append(int(binary_string, 2))
